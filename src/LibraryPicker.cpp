@@ -5,17 +5,17 @@
 * Default Library to use
 */
 
-#if defined(USE_SDL) && defined(USE_RAYLIB)
-#error `USE_SDL` is incompatible with `USE_RAYLIB`
+#if ( \
+	defined(USE_SDL) +\
+	defined(USE_RAYLIB) \
+) != 1
+#error Exactly one library must be defined. Define `USE_SDL` or `USE_RAYLIB`.
+#endif
 
-#elif defined(USE_SDL)
+#if defined(USE_SDL)
 static constexpr Lib DefaultLib = SDL;
-
 #elif defined(USE_RAYLIB)
 static constexpr Lib DefaultLib = raylib;
-
-#else
-#error The default librairy to use is not set. Define `USE_SDL` or `USE_RAYLIB`
 #endif
 
 /*
