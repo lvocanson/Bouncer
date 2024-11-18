@@ -3,5 +3,5 @@
 namespace Resources
 {
 	static constexpr auto AppName = "Bouncer";
-	static constexpr auto CirclePath = "res/Circle.bmp";
+	static constexpr auto CirclePath = "res/Circle2.png";
 }

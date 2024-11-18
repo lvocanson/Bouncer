@@ -22,5 +22,10 @@
     <ClInclude Include="src\Resources.h" />
     <ClInclude Include="src\RaylibImpl\RaylibWindow.h" />
     <ClInclude Include="src\LibraryPicker.h" />
+    <ClInclude Include="src\IText.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="..\..\..\Downloads\round.png" />
+    <Image Include="res\Circle2.png" />
   </ItemGroup>
 </Project>

@@ -3,6 +3,8 @@
 
 SdlSprite::SdlSprite(SDL_Renderer* renderer)
 	: m_Renderer(renderer)
+	, m_Rect()
+	, m_Texture()
 {
 }
 

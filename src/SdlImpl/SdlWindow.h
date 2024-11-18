@@ -13,12 +13,14 @@ public:
 	bool IsOpen() override;
 	void Update() override;
 
+	float GetFPS() override;
 	void BeginDraw() override;
 	void EndDraw() override;
 	void Clear(unsigned char r, unsigned char g, unsigned char b) override;
 	
 	ISprite* CreateSprite() override;
 	void Draw(ISprite&) override;
+	void Draw(IText&) override;
 
 	void Quit();
 

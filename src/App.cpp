@@ -12,7 +12,7 @@ App::App(Lib libToUse)
 	using namespace Resources;
 	m_Window->Create(AppName, 1600, 900);
 
-	static constexpr int SpriteNb = 20;
+	static constexpr int SpriteNb = 1;
 	m_Sprites.reserve(SpriteNb);
 	for (int i = 0; i < SpriteNb; i++)
 	{
@@ -38,6 +38,7 @@ int App::Run()
 
 		m_Window->BeginDraw();
 		m_Window->Clear(15, 15, 10);
+
 		for (auto sprite : m_Sprites)
 		{
 			m_Window->Draw(*sprite);

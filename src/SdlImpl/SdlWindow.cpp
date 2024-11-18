@@ -47,6 +47,11 @@ void SdlWindow::Update()
 	}
 }
 
+float SdlWindow::GetFPS()
+{
+	return 0;
+}
+
 void SdlWindow::BeginDraw()
 {
 }
@@ -71,6 +76,10 @@ void SdlWindow::Draw(ISprite& sprite)
 {
 	auto& sdlSprite = (SdlSprite&)sprite;
 	SDL_RenderTexture(m_Renderer, sdlSprite.GetTexture(), NULL, sdlSprite.GetRect());
+}
+
+void SdlWindow::Draw(IText&)
+{
 }
 
 void SdlWindow::Quit()
