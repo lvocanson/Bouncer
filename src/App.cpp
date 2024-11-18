@@ -18,7 +18,7 @@ App::App(Lib libToUse)
 	{
 		auto sprite = m_Window->CreateSprite();
 		sprite->LoadImage(Resources::CirclePath);
-		m_Sprites.emplace_back();
+		m_Sprites.emplace_back(sprite);
 	}
 }
 
