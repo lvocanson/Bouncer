@@ -3,7 +3,7 @@
 
 void SdlWindow::Initialize()
 {
-    if (SDL_InitSubSystem(SDL_INIT_VIDEO))
+    if (!SDL_InitSubSystem(SDL_INIT_VIDEO))
     {
         SDL_LogError(0, "Failed to init video subsystem. %s", SDL_GetError());
         return;
