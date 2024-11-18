@@ -23,14 +23,14 @@ void SdlSprite::LoadImage(const char* path)
 	}
 }
 
-void SdlSprite::SetPosition(int x, int y)
+void SdlSprite::SetPosition(float x, float y)
 {
-	m_Rect.x = static_cast<float>(x);
-	m_Rect.y = static_cast<float>(y);
+	m_Rect.x = x;
+	m_Rect.y = y;
 }
 
-void SdlSprite::SetSize(int w, int h)
+void SdlSprite::SetSize(float w, float h)
 {
-	m_Rect.w = static_cast<float>(w);
-	m_Rect.h = static_cast<float>(h);
+	m_Rect.w = w;
+	m_Rect.h = h;
 }

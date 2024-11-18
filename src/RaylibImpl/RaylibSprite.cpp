@@ -5,10 +5,10 @@ void RaylibSprite::LoadImage(const char* path)
 	m_Text = LoadTexture(path);
 }
 
-void RaylibSprite::SetPosition(int x, int y)
+void RaylibSprite::SetPosition(float x, float y)
 {
 }
 
-void RaylibSprite::SetSize(int w, int h)
+void RaylibSprite::SetSize(float w, float h)
 {
 }

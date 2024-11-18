@@ -11,8 +11,8 @@ public:
 
 	SdlSprite(SDL_Renderer* renderer);
 	void LoadImage(const char* path) override;
-	void SetPosition(int x, int y) override;
-	void SetSize(int w, int h) override;
+	void SetPosition(float x, float y) override;
+	void SetSize(float w, float h) override;
 
 	SDL_Texture* GetTexture() { return m_Texture; }
 	SDL_FRect* GetRect() { return &m_Rect; }

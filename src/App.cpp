@@ -17,10 +17,10 @@ App::App(Lib libToUse)
 	for (int i = 0; i < SpriteNb; i++)
 	{
 		auto sprite = m_Window->CreateSprite();
-		static constexpr int SpriteX = 10;
-		static constexpr int SpriteY = 10;
-		static constexpr int SpriteW = 100;
-		static constexpr int SpriteH = 100;
+		static constexpr float SpriteX = 10;
+		static constexpr float SpriteY = 10;
+		static constexpr float SpriteW = 100;
+		static constexpr float SpriteH = 100;
 
 		sprite->LoadImage(Resources::CirclePath);
 		sprite->SetPosition(SpriteX + SpriteW * i, SpriteY);
