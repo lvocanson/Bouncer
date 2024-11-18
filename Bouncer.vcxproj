@@ -165,10 +165,6 @@
     <ClInclude Include="src\IWindow.h" />
     <ClInclude Include="src\ObjectMaker.h" />
   </ItemGroup>
-  <ItemGroup>
-    <Image Include="..\..\..\Downloads\round.png" />
-    <Image Include="res\Circle2.png" />
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
