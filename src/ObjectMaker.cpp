@@ -21,19 +21,3 @@ IWindow* ObjectMaker::MakeWindow()
 	}
 	return nullptr;
 }
-
-ISprite* ObjectMaker::MakeSprite(IWindow* owner)
-{
-	switch (m_Library)
-	{
-	case SDL:
-	{
-		auto win = dynamic_cast<SdlWindow*>(owner);
-		assert(win);
-		return new SdlSprite(win->GetRenderer());
-	}
-	case raylib:
-		return new RaylibSprite();
-	}
-	return nullptr;
-}

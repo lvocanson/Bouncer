@@ -15,7 +15,7 @@ App::App(Lib libToUse)
 	m_Sprites.reserve(SpriteNb);
 	for (int i = 0; i < SpriteNb; i++)
 	{
-		m_Sprites.emplace_back(m_Maker.MakeSprite(m_Window));
+		m_Sprites.emplace_back(m_Window->CreateSprite());
 	}
 }
 

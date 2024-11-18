@@ -1,4 +1,5 @@
 #include "RaylibWindow.h"
+#include "RaylibSprite.h"
 
 void RaylibWindow::Initialize()
 {
@@ -23,6 +24,11 @@ void RaylibWindow::EndDraw()
 
 void RaylibWindow::Clear(unsigned char r, unsigned char g, unsigned char b)
 {
+}
+
+ISprite* RaylibWindow::CreateSprite()
+{
+	return new RaylibSprite();
 }
 
 void RaylibWindow::Draw(ISprite&)

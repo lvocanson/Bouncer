@@ -1,4 +1,5 @@
 #include "SdlWindow.h"
+#include "SdlSprite.h"
 #include <SDL3/SDL.h>
 
 void SdlWindow::Initialize()
@@ -45,6 +46,11 @@ void SdlWindow::Clear(unsigned char r, unsigned char g, unsigned char b)
 {
     SDL_SetRenderDrawColor(m_Renderer, r, g, b, ~0);
     SDL_RenderClear(m_Renderer);
+}
+
+ISprite* SdlWindow::CreateSprite()
+{
+    return new SdlSprite(m_Renderer);
 }
 
 void SdlWindow::Draw(ISprite& sprite)
