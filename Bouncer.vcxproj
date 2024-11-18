@@ -143,6 +143,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\IWindow.cpp" />
     <ClCompile Include="src\LibraryPicker.cpp" />
     <ClCompile Include="src\RaylibImpl\RaylibSprite.cpp" />
     <ClCompile Include="src\RaylibImpl\RaylibSprite.h" />

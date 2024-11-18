@@ -11,6 +11,7 @@
     <ClCompile Include="src\RaylibImpl\RaylibSprite.h" />
     <ClCompile Include="src\RaylibImpl\RaylibSprite.cpp" />
     <ClCompile Include="src\LibraryPicker.cpp" />
+    <ClCompile Include="src\IWindow.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\IWindow.h" />

@@ -12,7 +12,6 @@ public:
 	ObjectMaker(Lib library);
 
 	IWindow* MakeWindow();
-	ISprite* MakeSprite(IWindow*);
 
 private:
 

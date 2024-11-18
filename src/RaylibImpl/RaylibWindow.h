@@ -11,5 +11,7 @@ public:
 	void BeginDraw() override;
 	void EndDraw() override;
 	void Clear(unsigned char r, unsigned char g, unsigned char b) override;
+
+	ISprite* CreateSprite() override;
 	void Draw(ISprite&) override;
 };
