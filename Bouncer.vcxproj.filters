@@ -2,9 +2,24 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\ISprite.h" />
+    <ClCompile Include="src\ObjectMaker.cpp" />
+    <ClCompile Include="src\App.cpp" />
+    <ClCompile Include="src\SdlImpl\SdlWindow.cpp" />
+    <ClCompile Include="src\SdlImpl\SdlSprite.cpp" />
+    <ClCompile Include="src\RaylibImpl\RaylibWindow.cpp" />
+    <ClCompile Include="src\RaylibImpl\RaylibSprite.h" />
+    <ClCompile Include="src\RaylibImpl\RaylibSprite.cpp" />
     <ClCompile Include="src\LibraryPicker.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\IWindow.h" />
+    <ClInclude Include="src\ObjectMaker.h" />
+    <ClInclude Include="src\App.h" />
+    <ClInclude Include="src\SdlImpl\SdlWindow.h" />
+    <ClInclude Include="src\SdlImpl\SdlSprite.h" />
+    <ClInclude Include="src\Resources.h" />
+    <ClInclude Include="src\RaylibImpl\RaylibWindow.h" />
     <ClInclude Include="src\LibraryPicker.h" />
   </ItemGroup>
 </Project>

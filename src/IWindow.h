@@ -1,0 +1,15 @@
+#pragma once
+
+class ISprite;
+
+class IWindow
+{
+public:
+
+	virtual void Initialize() = 0;
+	virtual void Create(const char* title, int width, int height) = 0;
+	virtual bool IsOpen() = 0;
+	virtual void BeginDraw() = 0;
+	virtual void EndDraw() = 0;
+	virtual void Draw(ISprite&) = 0;
+};
