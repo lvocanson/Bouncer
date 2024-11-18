@@ -28,6 +28,7 @@ static constexpr Lib DefaultLib = raylib;
 
 #if !(defined(USE_SDL) && defined(FORCE_LIB))
 #pragma comment(lib, "raylib.lib")
+#pragma comment(lib, "Winmm.lib")
 #endif
 
 /*
