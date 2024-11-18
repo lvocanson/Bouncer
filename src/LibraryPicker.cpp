@@ -19,19 +19,6 @@ static constexpr Lib DefaultLib = raylib;
 #endif
 
 /*
-* Exclude other lib from lib if one is forced
-*/
-
-#if !(defined(USE_RAYLIB) && defined(FORCE_LIB))
-#pragma comment(lib, "SDL3.lib")
-#endif
-
-#if !(defined(USE_SDL) && defined(FORCE_LIB))
-#pragma comment(lib, "raylib.lib")
-#pragma comment(lib, "Winmm.lib")
-#endif
-
-/*
 * Parse command line arguments
 */
 
