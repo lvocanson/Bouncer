@@ -14,6 +14,10 @@ bool RaylibWindow::IsOpen()
 	return false;
 }
 
+void RaylibWindow::Update()
+{
+}
+
 void RaylibWindow::BeginDraw()
 {
 }
