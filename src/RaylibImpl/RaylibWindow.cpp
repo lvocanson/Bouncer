@@ -21,6 +21,10 @@ void RaylibWindow::EndDraw()
 {
 }
 
+void RaylibWindow::Clear(unsigned char r, unsigned char g, unsigned char b)
+{
+}
+
 void RaylibWindow::Draw(ISprite&)
 {
 }

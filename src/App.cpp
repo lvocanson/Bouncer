@@ -24,6 +24,7 @@ int App::Run()
 	while (m_Window->IsOpen())
 	{
 		m_Window->BeginDraw();
+		m_Window->Clear(200, 25, 25);
 		for (auto sprite : m_Sprites)
 		{
 			m_Window->Draw(*sprite);

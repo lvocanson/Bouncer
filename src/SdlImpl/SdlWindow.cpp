@@ -34,12 +34,17 @@ bool SdlWindow::IsOpen()
 
 void SdlWindow::BeginDraw()
 {
-    SDL_RenderClear(m_Renderer);
 }
 
 void SdlWindow::EndDraw()
 {
     SDL_RenderPresent(m_Renderer);
+}
+
+void SdlWindow::Clear(unsigned char r, unsigned char g, unsigned char b)
+{
+    SDL_SetRenderDrawColor(m_Renderer, r, g, b, ~0);
+    SDL_RenderClear(m_Renderer);
 }
 
 void SdlWindow::Draw(ISprite& sprite)

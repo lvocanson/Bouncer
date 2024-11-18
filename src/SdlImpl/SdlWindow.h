@@ -13,6 +13,7 @@ public:
 	bool IsOpen() override;
 	void BeginDraw() override;
 	void EndDraw() override;
+	void Clear(unsigned char r, unsigned char g, unsigned char b) override;
 	void Draw(ISprite&) override;
 
 	SDL_Renderer* GetRenderer() { return m_Renderer; }
