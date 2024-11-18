@@ -8,6 +8,6 @@ void RaylibSprite::SetPosition(int x, int y)
 {
 }
 
-void RaylibSprite::GetPosition(int& outX, int& outY)
+void RaylibSprite::SetSize(int w, int h)
 {
 }

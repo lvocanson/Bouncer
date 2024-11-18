@@ -7,5 +7,5 @@ public:
 
 	void LoadImage(const char* path) override;
 	void SetPosition(int x, int y) override;
-	void GetPosition(int& outX, int& outY) override;
+	void SetSize(int w, int h) override;
 };

@@ -1,5 +1,6 @@
 #include "App.h"
 #include "IWindow.h"
+#include "ISprite.h"
 #include "Resources.h"
 
 App::App(Lib libToUse)
@@ -15,7 +16,9 @@ App::App(Lib libToUse)
 	m_Sprites.reserve(SpriteNb);
 	for (int i = 0; i < SpriteNb; i++)
 	{
-		m_Sprites.emplace_back(m_Window->CreateSprite());
+		auto sprite = m_Window->CreateSprite();
+		sprite->LoadImage(Resources::CirclePath);
+		m_Sprites.emplace_back();
 	}
 }
 
@@ -26,7 +29,7 @@ int App::Run()
 		m_Window->Update();
 
 		m_Window->BeginDraw();
-		m_Window->Clear(200, 25, 25);
+		m_Window->Clear(15, 15, 10);
 		for (auto sprite : m_Sprites)
 		{
 			m_Window->Draw(*sprite);
