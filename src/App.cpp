@@ -17,7 +17,15 @@ App::App(Lib libToUse)
 	for (int i = 0; i < SpriteNb; i++)
 	{
 		auto sprite = m_Window->CreateSprite();
+		static constexpr int SpriteX = 10;
+		static constexpr int SpriteY = 10;
+		static constexpr int SpriteW = 100;
+		static constexpr int SpriteH = 100;
+
 		sprite->LoadImage(Resources::CirclePath);
+		sprite->SetPosition(SpriteX + SpriteW * i, SpriteY);
+		sprite->SetSize(SpriteW, SpriteH);
+
 		m_Sprites.emplace_back(sprite);
 	}
 }
