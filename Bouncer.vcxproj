@@ -159,8 +159,10 @@
     <ClCompile Include="src\ObjectMaker.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\GameData.h" />
     <ClInclude Include="src\IText.h" />
     <ClInclude Include="src\LibraryPicker.h" />
+    <ClInclude Include="src\MyMath.h" />
     <ClInclude Include="src\RaylibImpl\RaylibWindow.h" />
     <ClInclude Include="src\Resources.h" />
     <ClInclude Include="src\SdlImpl\SdlSprite.h" />
