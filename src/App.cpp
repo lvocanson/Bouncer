@@ -13,7 +13,7 @@ App::App(Lib libToUse)
 	m_Window = m_Maker.MakeWindow();
 	m_Window->Initialize();
 	m_Window->Create(Resources::AppName, 1600, 900);
-	
+
 	m_Sprites.reserve(GameData::SpriteNumber);
 	for (int i = 0; i < GameData::SpriteNumber; i++)
 	{
@@ -32,16 +32,16 @@ int App::Run()
 
 		for (auto sprite : m_Sprites)
 		{
-			m_Window->Draw(*sprite);
-			//m_Window->DrawFps(10,10);
+			m_Window->Draw(*sprite, RandByte(), RandByte(), RandByte());
+			m_Window->DrawFps(10, 10);
 		}
-		
+
 		m_Window->EndDraw();
 	}
 	return 0;
 }
 
-void App::CreateSprite() 
+void App::CreateSprite()
 {
 	auto sprite = m_Window->CreateSprite();
 
@@ -76,7 +76,7 @@ void App::UpdatePosition()
 		float x = sprite->GetPosX();
 		float y = sprite->GetPosY();
 
-		sprite->SetPosition(x+= sprite->GetSpeedX(), y += sprite->GetSpeedY());
+		sprite->SetPosition(x += sprite->GetSpeedX(), y += sprite->GetSpeedY());
 
 		if ((sprite->GetPosX() >= (m_Window->GetWidth() - sprite->GetSizeX()) || sprite->GetPosX() < 0))
 			sprite->ChangeDirectionX();

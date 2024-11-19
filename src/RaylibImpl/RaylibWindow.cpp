@@ -2,6 +2,7 @@
 #include "RaylibSprite.h"
 #include <raylib.h>
 #include "Resources.h"
+#include "iostream"
 
 void RaylibWindow::Initialize()
 {
@@ -52,15 +53,15 @@ ISprite* RaylibWindow::CreateSprite()
 	return new RaylibSprite();
 }
 
-void RaylibWindow::Draw(ISprite& sprite)
+void RaylibWindow::Draw(ISprite& sprite, unsigned char r, unsigned char g, unsigned char b)
 {
 	auto& raylibSprite = (RaylibSprite&)sprite;
 	auto texture = raylibSprite.GetTexture();
 
-	DrawTexturePro(texture, {0.0f, 0.0f, (float)texture.width, (float)texture.height}, raylibSprite.GetRect(), {0,0}, 0.0f, WHITE);
+	DrawTexturePro(texture, {0.0f, 0.0f, (float)texture.width, (float)texture.height}, raylibSprite.GetRect(), {0,0}, 0.0f, Color(r,g,b));
 }
 
-void RaylibWindow::Draw(IText&)
+void RaylibWindow::Draw(IText&, unsigned char r, unsigned char g, unsigned char b)
 {
 
 }

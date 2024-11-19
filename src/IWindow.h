@@ -19,8 +19,8 @@ public:
 	virtual void Clear(unsigned char r, unsigned char g, unsigned char b) = 0;
 	
 	virtual ISprite* CreateSprite() = 0;
-	virtual void Draw(ISprite&) = 0;
-	virtual void Draw(IText&) = 0;
+	virtual void Draw(ISprite&, unsigned char r, unsigned char g, unsigned char b) = 0;
+	virtual void Draw(IText&, unsigned char r, unsigned char g, unsigned char b) = 0;
 	virtual void DrawFps(float x, float y) = 0;
 
 	virtual int GetWidth() = 0;

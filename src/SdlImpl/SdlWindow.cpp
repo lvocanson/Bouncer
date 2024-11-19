@@ -76,13 +76,14 @@ ISprite* SdlWindow::CreateSprite()
 	return new SdlSprite(m_Renderer);
 }
 
-void SdlWindow::Draw(ISprite& sprite)
+void SdlWindow::Draw(ISprite& sprite, unsigned char r, unsigned char g, unsigned char b)
 {
 	auto& sdlSprite = (SdlSprite&)sprite;
 	SDL_RenderTexture(m_Renderer, sdlSprite.GetTexture(), NULL, sdlSprite.GetRect());
+	SDL_SetTextureColorMod(sdlSprite.GetTexture(),r,g,b);
 }
 
-void SdlWindow::Draw(IText&)
+void SdlWindow::Draw(IText&, unsigned char r, unsigned char g, unsigned char b)
 {
 }
 
