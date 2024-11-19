@@ -6,6 +6,8 @@ SdlSprite::SdlSprite(SDL_Renderer* renderer)
 	, m_Rect()
 	, m_Texture()
 {
+	m_SpeedX = 5;
+	m_SpeedY = 5;
 }
 
 void SdlSprite::LoadImage(const char* path)
@@ -25,6 +27,16 @@ void SdlSprite::LoadImage(const char* path)
 	}
 }
 
+void SdlSprite::ChangeDirectionX()
+{
+	m_SpeedX *= -1.0f;
+}
+
+void SdlSprite::ChangeDirectionY()
+{
+	m_SpeedY *= -1.0f;
+}
+
 void SdlSprite::SetPosition(float x, float y)
 {
 	m_Rect.x = x;
@@ -36,3 +48,34 @@ void SdlSprite::SetSize(float w, float h)
 	m_Rect.w = w;
 	m_Rect.h = h;
 }
+
+float SdlSprite::GetPosX()
+{
+	return m_Rect.x;
+}
+
+float SdlSprite::GetPosY()
+{
+	return m_Rect.y;
+}
+float SdlSprite::GetSizeX()
+{
+	return m_Rect.w;
+}
+
+float SdlSprite::GetSizeY()
+{
+	return m_Rect.h;
+}
+
+float SdlSprite::GetSpeedX()
+{
+	return m_SpeedX;
+}
+
+float SdlSprite::GetSpeedY()
+{
+	return m_SpeedY;
+}
+
+

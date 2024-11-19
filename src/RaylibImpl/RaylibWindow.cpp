@@ -59,3 +59,13 @@ void RaylibWindow::Draw(IText&)
 {
 
 }
+
+int RaylibWindow::GetWidth()
+{
+	return GetScreenWidth();
+}
+
+int RaylibWindow::GetHeight()
+{
+	return GetScreenHeight();
+}

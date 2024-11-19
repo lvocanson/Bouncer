@@ -22,6 +22,10 @@ public:
 	void Draw(ISprite&) override;
 	void Draw(IText&) override;
 
+
+	int GetWidth() override;
+	int GetHeight() override;
+
 	void Quit();
 
 private:

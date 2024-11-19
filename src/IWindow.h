@@ -20,4 +20,7 @@ public:
 	virtual ISprite* CreateSprite() = 0;
 	virtual void Draw(ISprite&) = 0;
 	virtual void Draw(IText&) = 0;
+
+	virtual int GetWidth() = 0;
+	virtual int GetHeight() = 0;
 };

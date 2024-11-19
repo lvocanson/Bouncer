@@ -18,4 +18,7 @@ public:
 	ISprite* CreateSprite() override;
 	void Draw(ISprite&) override;
 	void Draw(IText&) override;
+
+	int GetWidth() override;
+	int GetHeight() override;
 };

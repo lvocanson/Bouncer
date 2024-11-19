@@ -82,6 +82,16 @@ void SdlWindow::Draw(IText&)
 {
 }
 
+int SdlWindow::GetWidth()
+{
+	return 0;
+}
+
+int SdlWindow::GetHeight()
+{
+	return 0;
+}
+
 void SdlWindow::Quit()
 {
 	SDL_DestroyRenderer(m_Renderer);
