@@ -5,7 +5,7 @@
 
 inline void InitRand()
 {
-	srand(static_cast<unsigned>(time(nullptr)));
+	srand(static_cast<unsigned int>(time(nullptr)));
 }
 
 // random in range [a, b)
@@ -31,5 +31,5 @@ inline unsigned char RandByte()
 
 inline bool CoinFlip()
 {
-	return rand() % 2;
+	return static_cast<bool>(rand() % 2);
 }

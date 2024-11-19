@@ -12,7 +12,7 @@ public:
 	App(Lib libToUse);
 	int Run();
 	void CreateSprite();
-	void UpdatePosition();
+	void UpdatePosition(float dt);
 
 private:
 	ObjectMaker m_Maker;

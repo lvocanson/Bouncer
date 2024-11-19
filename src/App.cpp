@@ -4,6 +4,7 @@
 #include "MyMath.h"
 #include "GameData.h"
 #include "Resources.h"
+#include <algorithm>
 
 App::App(Lib libToUse)
 	: m_Maker(libToUse)
@@ -13,6 +14,7 @@ App::App(Lib libToUse)
 	m_Window = m_Maker.MakeWindow();
 	m_Window->Initialize();
 	m_Window->Create(Resources::AppName, 1600, 900);
+	m_Window->SetFont(Resources::FontPath, Resources::FontSize);
 
 	m_Sprites.reserve(GameData::SpriteNumber);
 	for (int i = 0; i < GameData::SpriteNumber; i++)
@@ -23,20 +25,32 @@ App::App(Lib libToUse)
 
 int App::Run()
 {
+	float deltaTime = 0;
+	float fpsTimer = 0;
+	char fpsText[255]{0};
+
 	while (m_Window->IsOpen())
 	{
-		m_Window->Update();
-		UpdatePosition();
+		UpdatePosition(deltaTime);
+
 		m_Window->BeginDraw();
 		m_Window->Clear(15, 15, 10);
 
 		for (auto sprite : m_Sprites)
 		{
 			m_Window->Draw(*sprite, RandByte(), RandByte(), RandByte());
-			m_Window->DrawFps(10, 10);
 		}
 
+		if ((fpsTimer += deltaTime) > 1)
+		{
+			sprintf_s(fpsText, "FPS: %i", static_cast<int>(1 / deltaTime));
+			fpsTimer--;
+		}
+		m_Window->Draw(fpsText, 255, 255, 255);
+
 		m_Window->EndDraw();
+
+		deltaTime = m_Window->Update();
 	}
 	return 0;
 }
@@ -69,18 +83,30 @@ void App::CreateSprite()
 	m_Sprites.emplace_back(sprite);
 }
 
-void App::UpdatePosition()
+void App::UpdatePosition(float dt)
 {
 	for (auto sprite : m_Sprites)
 	{
-		float x = sprite->GetPosX();
-		float y = sprite->GetPosY();
+		float newX = sprite->GetPosX() + sprite->GetSpeedX() * dt;
+		float newY = sprite->GetPosY() + sprite->GetSpeedY() * dt;
 
-		sprite->SetPosition(x += sprite->GetSpeedX(), y += sprite->GetSpeedY());
+		float minX = 0.0f;
+		float maxX = m_Window->GetWidth() - sprite->GetSizeX();
+		float minY = 0.0f;
+		float maxY = m_Window->GetHeight() - sprite->GetSizeY();
 
-		if ((sprite->GetPosX() >= (m_Window->GetWidth() - sprite->GetSizeX()) || sprite->GetPosX() < 0))
+		if (newX <= minX || newX >= maxX)
+		{
 			sprite->ChangeDirectionX();
-		if ((sprite->GetPosY() >= (m_Window->GetHeight() - sprite->GetSizeY()) || sprite->GetPosY() < 0))
+			newX = std::clamp(newX, minX, maxX);
+		}
+
+		if (newY <= minY || newY >= maxY)
+		{
 			sprite->ChangeDirectionY();
+			newY = std::clamp(newY, minY, maxY);
+		}
+
+		sprite->SetPosition(newX, newY);
 	}
 }

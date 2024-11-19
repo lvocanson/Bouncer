@@ -1,8 +1,5 @@
 #include "RaylibWindow.h"
 #include "RaylibSprite.h"
-#include <raylib.h>
-#include "Resources.h"
-#include "iostream"
 
 void RaylibWindow::Initialize()
 {
@@ -13,24 +10,24 @@ void RaylibWindow::Create(const char* title, int width, int height)
 	InitWindow(width, height, title);
 }
 
+void RaylibWindow::Quit()
+{
+	UnloadFont(m_Font);
+}
+
 bool RaylibWindow::IsOpen()
 {
 	return !WindowShouldClose();
 }
 
-void RaylibWindow::Update()
+float RaylibWindow::Update()
 {
-
+	return GetFrameTime();
 }
 
-float RaylibWindow::GetFps()
+void RaylibWindow::SetFont(const char* path, float size)
 {
-	return 0;
-}
-
-void RaylibWindow::SetFps(int value)
-{
-	SetTargetFPS(value);
+	m_Font = LoadFont(path);
 }
 
 void RaylibWindow::BeginDraw()
@@ -61,14 +58,9 @@ void RaylibWindow::Draw(ISprite& sprite, unsigned char r, unsigned char g, unsig
 	DrawTexturePro(texture, {0.0f, 0.0f, (float)texture.width, (float)texture.height}, raylibSprite.GetRect(), {0,0}, 0.0f, Color(r,g,b));
 }
 
-void RaylibWindow::Draw(IText&, unsigned char r, unsigned char g, unsigned char b)
+void RaylibWindow::Draw(char* text, unsigned char r, unsigned char g, unsigned char b)
 {
-
-}
-
-void RaylibWindow::DrawFps(float x, float y)
-{
-	DrawFPS(x, y);
+	// TODO
 }
 
 int RaylibWindow::GetWidth()

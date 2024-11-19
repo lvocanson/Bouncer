@@ -21,7 +21,6 @@
     <ClInclude Include="src\Resources.h" />
     <ClInclude Include="src\RaylibImpl\RaylibWindow.h" />
     <ClInclude Include="src\LibraryPicker.h" />
-    <ClInclude Include="src\IText.h" />
     <ClInclude Include="src\GameData.h" />
     <ClInclude Include="src\MyMath.h" />
   </ItemGroup>

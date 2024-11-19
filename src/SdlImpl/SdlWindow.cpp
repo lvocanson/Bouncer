@@ -1,6 +1,8 @@
 #include "SdlWindow.h"
 #include "SdlSprite.h"
+#include "Resources.h"
 #include <SDL3/SDL.h>
+#include <SDL3_ttf/SDL_ttf.h>
 
 void SdlWindow::Initialize()
 {
@@ -9,6 +11,11 @@ void SdlWindow::Initialize()
 		SDL_LogError(0, "Failed to init video subsystem. %s", SDL_GetError());
 		return;
 	}
+
+	m_LastFrameCounter = SDL_GetPerformanceCounter();
+	m_CountPerSecond = SDL_GetPerformanceFrequency();
+
+	TTF_Init();
 }
 
 void SdlWindow::Create(const char* title, int width, int height)
@@ -28,12 +35,30 @@ void SdlWindow::Create(const char* title, int width, int height)
 	}
 }
 
+void SdlWindow::Quit()
+{
+	TTF_CloseFont(m_Font);
+	m_Font = nullptr;
+
+	TTF_DestroyRendererTextEngine(m_Engine);
+	m_Engine = nullptr;
+
+	SDL_DestroyRenderer(m_Renderer);
+	m_Renderer = nullptr;
+
+	SDL_DestroyWindow(m_Window);
+	m_Window = nullptr;
+
+	TTF_Quit();
+	SDL_Quit();
+}
+
 bool SdlWindow::IsOpen()
 {
 	return m_Window != nullptr;
 }
 
-void SdlWindow::Update()
+float SdlWindow::Update()
 {
 	SDL_Event event;
 	while (SDL_PollEvent(&event))
@@ -45,15 +70,29 @@ void SdlWindow::Update()
 			break;
 		}
 	}
+
+	auto beforeLastCounter = m_LastFrameCounter;
+	m_LastFrameCounter = SDL_GetPerformanceCounter();
+	float deltaTime = static_cast<float>(m_LastFrameCounter - beforeLastCounter) / m_CountPerSecond;
+	return deltaTime;
 }
 
-float SdlWindow::GetFps()
+void SdlWindow::SetFont(const char* path, float size)
 {
-	return 0;
-}
+	TTF_CloseFont(m_Font);
+	TTF_DestroyRendererTextEngine(m_Engine);
 
-void SdlWindow::SetFps(int value)
-{
+	m_Engine = TTF_CreateRendererTextEngine(m_Renderer);
+	if (m_Engine == NULL)
+	{
+		SDL_LogError(0, "Text Engine creation failed: %s", SDL_GetError());
+	}
+
+	m_Font = TTF_OpenFont(path, size);
+	if (m_Font == NULL)
+	{
+		SDL_LogError(0, "Open Font failed: %s", SDL_GetError());
+	}
 }
 
 void SdlWindow::BeginDraw()
@@ -79,22 +118,32 @@ ISprite* SdlWindow::CreateSprite()
 void SdlWindow::Draw(ISprite& sprite, unsigned char r, unsigned char g, unsigned char b)
 {
 	auto& sdlSprite = (SdlSprite&)sprite;
+	SDL_SetTextureColorMod(sdlSprite.GetTexture(), r, g, b);
 	SDL_RenderTexture(m_Renderer, sdlSprite.GetTexture(), NULL, sdlSprite.GetRect());
-	SDL_SetTextureColorMod(sdlSprite.GetTexture(),r,g,b);
 }
 
-void SdlWindow::Draw(IText&, unsigned char r, unsigned char g, unsigned char b)
+void SdlWindow::Draw(char* text, unsigned char r, unsigned char g, unsigned char b)
 {
-}
+	auto ttfText = TTF_CreateText(m_Engine, m_Font, text, 0);
+	if (ttfText == NULL)
+	{
+		SDL_LogError(0, "Create Text failed: %s", SDL_GetError());
+	}
 
-void SdlWindow::DrawFps(float x, float y)
-{
+	TTF_SetTextColor(ttfText, r, g, b, 255);
+
+	if (!TTF_DrawRendererText(ttfText, 10, 10))
+	{
+		SDL_LogError(0, "Draw text failed: %s", SDL_GetError());
+	}
+
+	TTF_DestroyText(ttfText);
 }
 
 int SdlWindow::GetWidth()
 {
 	int w;
-	SDL_GetWindowSize(m_Window,&w, NULL);
+	SDL_GetWindowSize(m_Window, &w, NULL);
 	return w;
 }
 
@@ -103,15 +152,4 @@ int SdlWindow::GetHeight()
 	int h;
 	SDL_GetWindowSize(m_Window, NULL, &h);
 	return h;
-}
-
-void SdlWindow::Quit()
-{
-	SDL_DestroyRenderer(m_Renderer);
-	m_Renderer = nullptr;
-
-	SDL_DestroyWindow(m_Window);
-	m_Window = nullptr;
-
-	SDL_Quit();
 }
