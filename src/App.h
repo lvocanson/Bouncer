@@ -11,6 +11,7 @@ public:
 
 	App(Lib libToUse);
 	int Run();
+	void CreateSprite();
 	void UpdatePosition();
 
 private:

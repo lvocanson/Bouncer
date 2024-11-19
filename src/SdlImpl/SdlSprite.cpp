@@ -6,9 +6,9 @@ SdlSprite::SdlSprite(SDL_Renderer* renderer)
 	: m_Renderer(renderer)
 	, m_Rect()
 	, m_Texture()
+	, m_SpeedX()
+	, m_SpeedY()
 {
-	m_SpeedX = 5;
-	m_SpeedY = 5;
 }
 
 void SdlSprite::LoadImage(const char* path)
@@ -36,6 +36,12 @@ void SdlSprite::ChangeDirectionX()
 void SdlSprite::ChangeDirectionY()
 {
 	m_SpeedY *= -1.0f;
+}
+
+void SdlSprite::SetSpeed(float x, float y)
+{
+	m_SpeedX = x;
+	m_SpeedY = y;
 }
 
 void SdlSprite::SetPosition(float x, float y)

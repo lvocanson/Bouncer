@@ -12,6 +12,7 @@ public:
 
 	void SetPosition(float x, float y) override;
 	void SetSize(float w, float h) override;
+	void SetSpeed(float x, float y) override;
 	float GetPosX() override;
 	float GetPosY() override;
 	float GetSizeX() override;

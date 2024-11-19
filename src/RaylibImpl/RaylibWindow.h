@@ -10,7 +10,8 @@ public:
 	bool IsOpen() override;
 	void Update() override;
 
-	float GetFPS() override;
+	float GetFps() override;
+	void SetFps(int fps) override;
 	void BeginDraw() override;
 	void EndDraw() override;
 	void Clear(unsigned char r, unsigned char g, unsigned char b) override;
@@ -18,7 +19,7 @@ public:
 	ISprite* CreateSprite() override;
 	void Draw(ISprite&) override;
 	void Draw(IText&) override;
-
+	void DrawFps(float x, float y) override;
 	int GetWidth() override;
 	int GetHeight() override;
 };

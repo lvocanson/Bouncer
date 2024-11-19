@@ -3,20 +3,15 @@
 RaylibSprite::RaylibSprite()
 	: m_Rect()
 	, m_Text()
+	, m_SpeedX()
+	, m_SpeedY()
 {
-	m_SpeedX = 0.1;
-	m_SpeedY = 0.1;
 }
 
 void RaylibSprite::LoadImage(const char* path)
 {
 	m_Text = LoadTexture(path);
 	SetTextureWrap(m_Text, TEXTURE_WRAP_CLAMP);
-	/*if (m_Text == NULL)
-	{
-		SDL_LogError(0, "Load BMP failed: %s", SDL_GetError());
-		return;
-	}*/
 }
 
 void RaylibSprite::ChangeDirectionX()
@@ -39,6 +34,12 @@ void RaylibSprite::SetSize(float w, float h)
 {
 	m_Rect.width = w;
 	m_Rect.height = h;
+}
+
+void RaylibSprite::SetSpeed(float x, float y)
+{
+	m_SpeedX = x;
+	m_SpeedY = y;
 }
 
 float RaylibSprite::GetPosX()

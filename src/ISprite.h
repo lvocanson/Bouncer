@@ -13,6 +13,7 @@ public:
 	virtual float GetSizeY() = 0;
 	virtual void ChangeDirectionX() = 0;
 	virtual void ChangeDirectionY() = 0;
+	virtual void SetSpeed(float x, float y) = 0;
 	virtual float GetSpeedX() = 0;
 	virtual float GetSpeedY() = 0;
 

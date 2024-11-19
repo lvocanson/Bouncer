@@ -47,9 +47,13 @@ void SdlWindow::Update()
 	}
 }
 
-float SdlWindow::GetFPS()
+float SdlWindow::GetFps()
 {
 	return 0;
+}
+
+void SdlWindow::SetFps(int value)
+{
 }
 
 void SdlWindow::BeginDraw()
@@ -82,14 +86,22 @@ void SdlWindow::Draw(IText&)
 {
 }
 
+void SdlWindow::DrawFps(float x, float y)
+{
+}
+
 int SdlWindow::GetWidth()
 {
-	return 0;
+	int w;
+	SDL_GetWindowSize(m_Window,&w, NULL);
+	return w;
 }
 
 int SdlWindow::GetHeight()
 {
-	return 0;
+	int h;
+	SDL_GetWindowSize(m_Window, NULL, &h);
+	return h;
 }
 
 void SdlWindow::Quit()

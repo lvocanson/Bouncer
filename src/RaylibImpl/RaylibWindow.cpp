@@ -22,9 +22,14 @@ void RaylibWindow::Update()
 
 }
 
-float RaylibWindow::GetFPS()
+float RaylibWindow::GetFps()
 {
 	return 0;
+}
+
+void RaylibWindow::SetFps(int value)
+{
+	SetTargetFPS(value);
 }
 
 void RaylibWindow::BeginDraw()
@@ -58,6 +63,11 @@ void RaylibWindow::Draw(ISprite& sprite)
 void RaylibWindow::Draw(IText&)
 {
 
+}
+
+void RaylibWindow::DrawFps(float x, float y)
+{
+	DrawFPS(x, y);
 }
 
 int RaylibWindow::GetWidth()

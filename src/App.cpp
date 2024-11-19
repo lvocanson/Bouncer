@@ -13,25 +13,15 @@ App::App(Lib libToUse)
 
 	using namespace Resources;
 	m_Window->Create(AppName, 1600, 900);
+	//m_Window->SetFps(500);
 
 	static constexpr int SpriteNb = 10;
 	m_Sprites.reserve(SpriteNb);
 	srand(time(NULL));
-
+	
 	for (int i = 0; i < SpriteNb; i++)
 	{
-		auto sprite = m_Window->CreateSprite();
-
-		int SpriteSize = rand() % 100 + 50;
-
-		int SpriteX = rand() % (m_Window->GetWidth() - SpriteSize);
-		int SpriteY = rand() % (m_Window->GetHeight() - SpriteSize);
-
-		sprite->LoadImage(Resources::CirclePath);
-		sprite->SetPosition(SpriteX, SpriteY);
-		sprite->SetSize(SpriteSize, SpriteSize);
-
-		m_Sprites.emplace_back(sprite);
+		CreateSprite();
 	}
 }
 
@@ -47,11 +37,38 @@ int App::Run()
 		for (auto sprite : m_Sprites)
 		{
 			m_Window->Draw(*sprite);
+			//m_Window->DrawFps(10,10);
 		}
 		
 		m_Window->EndDraw();
 	}
 	return 0;
+}
+
+void App::CreateSprite() 
+{
+	auto sprite = m_Window->CreateSprite();
+
+	int SpriteSize = rand() % 100 + 50;
+
+	int SpriteX = rand() % (m_Window->GetWidth() - SpriteSize);
+	int SpriteY = rand() % (m_Window->GetHeight() - SpriteSize);
+
+	float SpeedX = rand() % 1 + 0.5;
+	float SpeedY = rand() % 1 + 0.5;
+
+	if (rand() % 2 == 1) {
+		sprite->ChangeDirectionX();
+	}
+	if (rand() % 2 == 1) {
+		sprite->ChangeDirectionY();
+	}
+	sprite->SetSpeed(SpeedX, SpeedY);
+	sprite->LoadImage(Resources::CirclePath);
+	sprite->SetPosition(SpriteX, SpriteY);
+	sprite->SetSize(SpriteSize, SpriteSize);
+
+	m_Sprites.emplace_back(sprite);
 }
 
 void App::UpdatePosition()

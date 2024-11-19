@@ -14,6 +14,7 @@ public:
 	void ChangeDirectionX() override;
 	void ChangeDirectionY() override;
 
+	void SetSpeed(float x, float y) override;
 	void SetPosition(float x, float y) override;
 	void SetSize(float w, float h) override;
 	float GetPosX() override;
