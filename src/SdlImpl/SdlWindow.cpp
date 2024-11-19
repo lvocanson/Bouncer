@@ -1,10 +1,11 @@
 #include "SdlWindow.h"
 #include "SdlSprite.h"
-#include "Resources.h"
+#include "Game/Text.h"
 #include <SDL3/SDL.h>
 #include <SDL3_ttf/SDL_ttf.h>
 
-void SdlWindow::Initialize()
+
+void SdlWindow::Create(const char* title, int width, int height)
 {
 	if (!SDL_InitSubSystem(SDL_INIT_VIDEO))
 	{
@@ -15,11 +16,11 @@ void SdlWindow::Initialize()
 	m_LastFrameCounter = SDL_GetPerformanceCounter();
 	m_CountPerSecond = SDL_GetPerformanceFrequency();
 
-	TTF_Init();
-}
+	if (!TTF_Init())
+	{
+		SDL_LogError(0, "Failed to init ttf library. %s", SDL_GetError());
+	}
 
-void SdlWindow::Create(const char* title, int width, int height)
-{
 	m_Window = SDL_CreateWindow(title, width, height, SDL_WINDOW_RESIZABLE);
 	if (m_Window == NULL)
 	{
@@ -104,33 +105,37 @@ void SdlWindow::EndDraw()
 	SDL_RenderPresent(m_Renderer);
 }
 
-void SdlWindow::Clear(unsigned char r, unsigned char g, unsigned char b)
+void SdlWindow::Clear(MyColor color)
 {
-	SDL_SetRenderDrawColor(m_Renderer, r, g, b, ~0);
+	SDL_SetRenderDrawColor(m_Renderer, color.r, color.g, color.b, color.a);
 	SDL_RenderClear(m_Renderer);
 }
 
-ISprite* SdlWindow::CreateSprite()
+Sprite* SdlWindow::CreateSprite()
 {
 	return new SdlSprite(m_Renderer);
 }
 
-void SdlWindow::Draw(ISprite& sprite, unsigned char r, unsigned char g, unsigned char b)
+void SdlWindow::Draw(Sprite& sprite)
 {
 	auto& sdlSprite = (SdlSprite&)sprite;
-	SDL_SetTextureColorMod(sdlSprite.GetTexture(), r, g, b);
-	SDL_RenderTexture(m_Renderer, sdlSprite.GetTexture(), NULL, sdlSprite.GetRect());
+	MyColor color = sprite.GetTint();
+	SDL_SetTextureColorMod(sdlSprite.GetTexture(), color.r, color.g, color.b);
+	Rect spriteRect = sdlSprite.GetRect();
+	SDL_FRect destRect = {spriteRect.x, spriteRect.y, spriteRect.w, spriteRect.h};
+	SDL_RenderTexture(m_Renderer, sdlSprite.GetTexture(), NULL, &destRect);
 }
 
-void SdlWindow::Draw(char* text, unsigned char r, unsigned char g, unsigned char b)
+void SdlWindow::Draw(Text& text)
 {
-	auto ttfText = TTF_CreateText(m_Engine, m_Font, text, 0);
+	auto ttfText = TTF_CreateText(m_Engine, m_Font, text.GetText().c_str(), 0);
 	if (ttfText == NULL)
 	{
 		SDL_LogError(0, "Create Text failed: %s", SDL_GetError());
 	}
 
-	TTF_SetTextColor(ttfText, r, g, b, 255);
+	MyColor color = text.GetColor();
+	TTF_SetTextColor(ttfText, color.r, color.g, color.b, color.a);
 
 	if (!TTF_DrawRendererText(ttfText, 10, 10))
 	{

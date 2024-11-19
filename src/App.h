@@ -1,9 +1,9 @@
 #pragma once
-#include "ObjectMaker.h"
+#include "Utils/ObjectMaker.h"
 #include <vector>
 
 class IWindow;
-class ISprite;
+class Sprite;
 
 class App
 {
@@ -17,5 +17,5 @@ public:
 private:
 	ObjectMaker m_Maker;
 	IWindow* m_Window;
-	std::vector<ISprite*> m_Sprites;
+	std::vector<Sprite*> m_Sprites;
 };

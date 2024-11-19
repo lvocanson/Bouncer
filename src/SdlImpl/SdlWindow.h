@@ -1,5 +1,5 @@
 #pragma once
-#include "IWindow.h"
+#include "Game/IWindow.h"
 #include <SDL3/SDL_stdinc.h>
 
 struct SDL_Window;
@@ -11,7 +11,6 @@ class SdlWindow : public IWindow
 {
 public:
 
-	void Initialize() override;
 	void Create(const char* title, int width, int height) override;
 	void Quit() override;
 	bool IsOpen() override;
@@ -21,11 +20,11 @@ public:
 
 	void BeginDraw() override;
 	void EndDraw() override;
-	void Clear(unsigned char r, unsigned char g, unsigned char b) override;
+	void Clear(MyColor color) override;
 	
-	ISprite* CreateSprite() override;
-	void Draw(ISprite&, unsigned char r, unsigned char g, unsigned char b) override;
-	void Draw(char* text, unsigned char r, unsigned char g, unsigned char b) override;
+	Sprite* CreateSprite() override;
+	void Draw(Sprite&) override;
+	void Draw(Text&) override;
 
 	int GetWidth() override;
 	int GetHeight() override;

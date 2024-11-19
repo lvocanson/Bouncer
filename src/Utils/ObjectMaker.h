@@ -1,7 +1,7 @@
 #pragma once
 #include "LibraryPicker.h"
 
-class ISprite;
+class Sprite;
 class IWindow;
 
 // Only class that has the responsability to choose between implementations

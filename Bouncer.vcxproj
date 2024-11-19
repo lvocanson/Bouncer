@@ -147,7 +147,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="src\LibraryPicker.cpp" />
+    <ClCompile Include="src\Utils\LibraryPicker.cpp" />
     <ClCompile Include="src\RaylibImpl\RaylibSprite.cpp" />
     <ClCompile Include="src\RaylibImpl\RaylibSprite.h" />
     <ClCompile Include="src\RaylibImpl\RaylibWindow.cpp" />
@@ -155,20 +155,24 @@
     <ClCompile Include="src\SdlImpl\SdlWindow.cpp" />
     <ClCompile Include="src\App.cpp" />
     <ClCompile Include="src\main.cpp" />
-    <ClCompile Include="src\ISprite.h" />
-    <ClCompile Include="src\ObjectMaker.cpp" />
+    <ClCompile Include="src\Game\Sprite.h" />
+    <ClCompile Include="src\Utils\ObjectMaker.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\GameData.h" />
-    <ClInclude Include="src\LibraryPicker.h" />
-    <ClInclude Include="src\MyMath.h" />
+    <ClInclude Include="src\Game\GameElement.h" />
+    <ClInclude Include="src\Game\Text.h" />
+    <ClInclude Include="src\Utils\MyColor.h" />
+    <ClInclude Include="src\Utils\LibraryPicker.h" />
+    <ClInclude Include="src\Utils\RandomHelper.h" />
+    <ClInclude Include="src\Utils\Rect.h" />
+    <ClInclude Include="src\Utils\Vec2.h" />
     <ClInclude Include="src\RaylibImpl\RaylibWindow.h" />
-    <ClInclude Include="src\Resources.h" />
+    <ClInclude Include="src\Game\Resources.h" />
     <ClInclude Include="src\SdlImpl\SdlSprite.h" />
     <ClInclude Include="src\SdlImpl\SdlWindow.h" />
     <ClInclude Include="src\App.h" />
-    <ClInclude Include="src\IWindow.h" />
-    <ClInclude Include="src\ObjectMaker.h" />
+    <ClInclude Include="src\Game\IWindow.h" />
+    <ClInclude Include="src\Utils\ObjectMaker.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
