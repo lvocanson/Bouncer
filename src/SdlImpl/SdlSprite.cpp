@@ -1,5 +1,6 @@
 #include "SdlSprite.h"
 #include <SDL3/SDL.h>
+#include <SDL3_image/SDL_image.h>
 
 SdlSprite::SdlSprite(SDL_Renderer* renderer)
 	: m_Renderer(renderer)
@@ -12,7 +13,7 @@ SdlSprite::SdlSprite(SDL_Renderer* renderer)
 
 void SdlSprite::LoadImage(const char* path)
 {
-	auto surface = SDL_LoadBMP(path);
+	auto surface = IMG_Load(path);
 	if (surface == NULL)
 	{
 		SDL_LogError(0, "Load BMP failed: %s", SDL_GetError());
