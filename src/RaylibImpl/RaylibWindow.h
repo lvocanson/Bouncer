@@ -25,8 +25,11 @@ public:
 	int GetWidth() override;
 	int GetHeight() override;
 
+	void ScorePoint() override;
+
 private:
 
 	Font m_Font;
 	float m_FontSize;
+	int m_score = 0;
 };

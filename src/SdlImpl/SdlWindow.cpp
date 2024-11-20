@@ -3,7 +3,6 @@
 #include "Game/Text.h"
 #include <SDL3/SDL.h>
 #include <SDL3_ttf/SDL_ttf.h>
-#include "iostream"
 
 void SdlWindow::Create(const char* title, int width, int height)
 {
@@ -77,6 +76,7 @@ float SdlWindow::Update()
 	float deltaTime = static_cast<float>(m_LastFrameCounter - beforeLastCounter) / m_CountPerSecond;
 	return deltaTime;
 }
+
 
 void SdlWindow::SetFont(const char* path, float size)
 {

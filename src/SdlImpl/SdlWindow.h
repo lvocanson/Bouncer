@@ -29,6 +29,8 @@ public:
 	int GetWidth() override;
 	int GetHeight() override;
 
+	void ScorePoint() override;
+
 private:
 
 	SDL_Window* m_Window = nullptr;
@@ -39,4 +41,6 @@ private:
 
 	Uint64 m_LastFrameCounter;
 	Uint64 m_CountPerSecond;
+
+	int m_score = 0;
 };
