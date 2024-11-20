@@ -63,7 +63,7 @@ void RaylibWindow::Draw(Text& text)
 {
 	Vec2 pos = text.GetPosition();
 	MyColor color = text.GetColor();
-	DrawTextEx(m_Font, text.GetText().c_str(), {pos.x, pos.y}, m_FontSize, 0, {color.r, color.g, color.b});
+	DrawTextEx(m_Font,text.GetText().c_str(), { pos.x, pos.y }, m_FontSize,0, Color(color.r, color.g, color.b, color.a));
 }
 
 int RaylibWindow::GetWidth()
