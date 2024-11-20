@@ -77,10 +77,12 @@ float SdlWindow::Update(std::vector<Sprite*>& sprites)
 
 				for (int i = 0; i < sprites.size(); i++)
 				{
-					bool test = mouseX >= sprites[i]->GetPosition().x && mouseX <= sprites[i]->GetPosition().x + sprites[i]->GetSize().x && mouseY >= mouseX <= sprites[i]->GetPosition().y && mouseY <= mouseX <= sprites[i]->GetPosition().y + sprites[i]->GetSize().y;
-					if (test)
+					bool isColliding = mouseX >= sprites[i]->GetPosition().x && mouseX <= sprites[i]->GetPosition().x + sprites[i]->GetSize().x && mouseY >= mouseX <= sprites[i]->GetPosition().y && mouseY <= mouseX <= sprites[i]->GetPosition().y + sprites[i]->GetSize().y;
+					if (isColliding)
 					{
 						sprites.erase(sprites.begin() + i);
+						m_score++;
+						ScorePoint();
 					}
 				}
 			}
@@ -93,6 +95,7 @@ float SdlWindow::Update(std::vector<Sprite*>& sprites)
 	float deltaTime = static_cast<float>(m_LastFrameCounter - beforeLastCounter) / m_CountPerSecond;
 	return deltaTime;
 }
+
 
 void SdlWindow::SetFont(const char* path, float size)
 {
@@ -173,4 +176,17 @@ int SdlWindow::GetHeight()
 	int h;
 	SDL_GetWindowSize(m_Window, NULL, &h);
 	return h;
+}
+
+void SdlWindow::ScorePoint()
+{
+	Text scoreText;
+	MyColor color(255, 255, 255, 127);
+	Vec2 position(10, 30);
+	std::string scoreString = std::to_string(m_score);
+
+	scoreText.SetText(scoreString);
+	scoreText.SetColor(color);
+	scoreText.SetPosition(position);
+	Draw(scoreText);
 }

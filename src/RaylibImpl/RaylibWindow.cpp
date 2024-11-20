@@ -31,6 +31,8 @@ float RaylibWindow::Update(std::vector<Sprite*>& sprites)
 		if (CheckCollisionPointRec(touchPosition, rect) && currentGesture == GESTURE_TAP)
 		{
 			sprites.erase(sprites.begin() + i);
+			m_score++;
+			ScorePoint();
 		}
 	}
 
@@ -87,4 +89,17 @@ int RaylibWindow::GetWidth()
 int RaylibWindow::GetHeight()
 {
 	return GetScreenHeight();
+}
+
+void RaylibWindow::ScorePoint()
+{
+	Text scoreText;
+	MyColor color(255, 255, 255, 255);
+	Vec2 position(30, 10);
+	std::string scoreString = std::to_string(m_score);
+
+	scoreText.SetText(scoreString);
+	scoreText.SetColor(color);
+	scoreText.SetPosition(position);
+	Draw(scoreText);
 }
