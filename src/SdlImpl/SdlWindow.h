@@ -29,8 +29,6 @@ public:
 	int GetWidth() override;
 	int GetHeight() override;
 
-	void ScorePoint() override;
-
 private:
 
 	SDL_Window* m_Window = nullptr;

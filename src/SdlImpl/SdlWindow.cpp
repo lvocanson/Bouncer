@@ -134,10 +134,11 @@ void SdlWindow::Draw(Text& text)
 		SDL_LogError(0, "Create Text failed: %s", SDL_GetError());
 	}
 
+	Vec2 pos = text.GetPosition();
 	MyColor color = text.GetColor();
 	TTF_SetTextColor(ttfText, color.r, color.g, color.b, color.a);
 
-	if (!TTF_DrawRendererText(ttfText, 10, 10))
+	if (!TTF_DrawRendererText(ttfText, pos.x, pos.y))
 	{
 		SDL_LogError(0, "Draw text failed: %s", SDL_GetError());
 	}

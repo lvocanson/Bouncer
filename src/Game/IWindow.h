@@ -28,6 +28,4 @@ public:
 
 	virtual int GetWidth() = 0;
 	virtual int GetHeight() = 0;
-
-	virtual void ScorePoint() = 0;
 };

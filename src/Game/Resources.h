@@ -24,7 +24,8 @@ namespace Resources
 	static constexpr float TimeToReachMinInterval = 60.f;
 
 	static constexpr MyColor BackgroundColor = {15, 15, 15};
-	static constexpr MyColor FpsTextColor = {255, 255, 255, 127};
+	static constexpr MyColor OnScreenTextColor = {255, 255, 255, 127};
 	static constexpr Vec2 FpsTextPosition = {10, 10};
+	static constexpr Vec2 ScoreTextPosition = {10, 25};
 	static constexpr float FpsUpdateInterval = 1.f;
 }

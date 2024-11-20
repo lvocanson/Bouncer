@@ -7,8 +7,8 @@ class Text : public GameElement
 {
 public:
 
-	// Do a copy
-	void SetText(std::string text) { m_Text = text; }
+	template <typename T> requires std::convertible_to<T, std::string>
+	void SetText(T text) { m_Text = text; }
 	const std::string& GetText() const { return m_Text; }
 
 	void SetColor(MyColor color) { m_Color = color; }

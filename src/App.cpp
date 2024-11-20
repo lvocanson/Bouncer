@@ -16,8 +16,13 @@ App::App(Lib libToUse)
 
 	m_Input = m_Maker.MakeMouseInput();
 
+	m_FpsText.SetText("FPS: 0");
 	m_FpsText.SetPosition(Resources::FpsTextPosition);
-	m_FpsText.SetColor(Resources::FpsTextColor);
+	m_FpsText.SetColor(Resources::OnScreenTextColor);
+
+	m_ScoreText.SetText("Score: 0");
+	m_ScoreText.SetPosition(Resources::ScoreTextPosition);
+	m_ScoreText.SetColor(Resources::OnScreenTextColor);
 
 	m_Sprites.fill(nullptr);
 	for (size_t i = 0; i < Resources::StartingSpriteNumber; i++)
@@ -59,6 +64,7 @@ int App::Run()
 			if (sprite && sprite->IsVisible()) m_Window->Draw(*sprite);
 		}
 		m_Window->Draw(m_FpsText);
+		m_Window->Draw(m_ScoreText);
 		m_Window->EndDraw();
 
 		m_DeltaTime = m_Window->Update();
@@ -144,6 +150,8 @@ void App::UpdateSprites()
 				((mousePosition.x - cx) * (mousePosition.x - cx)) / (a * a) + ((mousePosition.y - cy) * (mousePosition.y - cy)) / (b * b) <= 1.0f)
 			{
 				sprite->SetVisible(false);
+				m_Score++;
+				m_ScoreText.SetText(std::format("Score: {}", m_Score));
 				continue;
 			}
 		}

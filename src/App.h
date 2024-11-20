@@ -28,10 +28,12 @@ private:
 	IWindow* m_Window;
 	IMouseInput* m_Input;
 	Text m_FpsText;
+	Text m_ScoreText;
 	std::array<Sprite*, Resources::MaxSpriteNumber> m_Sprites;
 
 	float m_ElapsedTime = 0;
 	float m_DeltaTime = 0;
 	float m_SpawnTimer = 0;
 	float m_FpsUpdatTimer = 0;
+	unsigned int m_Score = 0;
 };
