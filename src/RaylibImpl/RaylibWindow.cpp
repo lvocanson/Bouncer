@@ -18,8 +18,20 @@ bool RaylibWindow::IsOpen()
 	return !WindowShouldClose();
 }
 
-float RaylibWindow::Update()
+float RaylibWindow::Update(std::vector<Sprite*>& sprites)
 {
+	Vector2 touchPosition = GetTouchPosition(0);
+	int currentGesture = GetGestureDetected();
+
+	for (int i = 0; i < sprites.size(); i++)
+	{
+		Rectangle rect = { sprites[i]->GetPosition().x, sprites[i]->GetPosition().y, sprites[i]->GetPosition().x + sprites[i]->GetSize().x, sprites[i]->GetPosition().y + sprites[i]->GetSize().y };
+		if (CheckCollisionPointRec(touchPosition, rect) && currentGesture == GESTURE_TAP)
+		{
+			sprites.erase(sprites.begin() + i);
+		}
+	}
+
 	return GetFrameTime();
 }
 

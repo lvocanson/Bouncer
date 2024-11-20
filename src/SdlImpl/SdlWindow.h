@@ -14,7 +14,7 @@ public:
 	void Create(const char* title, int width, int height) override;
 	void Quit() override;
 	bool IsOpen() override;
-	float Update() override;
+	float Update(std::vector<Sprite*>& sprites) override;
 
 	void SetFont(const char* path, float size) override;
 
@@ -28,7 +28,6 @@ public:
 
 	int GetWidth() override;
 	int GetHeight() override;
-
 
 private:
 

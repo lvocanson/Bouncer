@@ -3,7 +3,7 @@
 #include "Game/Text.h"
 #include <SDL3/SDL.h>
 #include <SDL3_ttf/SDL_ttf.h>
-
+#include "iostream"
 
 void SdlWindow::Create(const char* title, int width, int height)
 {
@@ -59,7 +59,7 @@ bool SdlWindow::IsOpen()
 	return m_Window != nullptr;
 }
 
-float SdlWindow::Update()
+float SdlWindow::Update(std::vector<Sprite*>& sprites)
 {
 	SDL_Event event;
 	while (SDL_PollEvent(&event))
@@ -68,6 +68,22 @@ float SdlWindow::Update()
 		{
 		case SDL_EVENT_QUIT:
 			Quit();
+			break;
+		case SDL_EVENT_MOUSE_BUTTON_DOWN:
+			if (event.button.button == SDL_BUTTON_LEFT)
+			{
+				float mouseX, mouseY;
+				SDL_GetMouseState(&mouseX, &mouseY);
+
+				for (int i = 0; i < sprites.size(); i++)
+				{
+					bool test = mouseX >= sprites[i]->GetPosition().x && mouseX <= sprites[i]->GetPosition().x + sprites[i]->GetSize().x && mouseY >= mouseX <= sprites[i]->GetPosition().y && mouseY <= mouseX <= sprites[i]->GetPosition().y + sprites[i]->GetSize().y;
+					if (test)
+					{
+						sprites.erase(sprites.begin() + i);
+					}
+				}
+			}
 			break;
 		}
 	}
@@ -122,7 +138,7 @@ void SdlWindow::Draw(Sprite& sprite)
 	MyColor color = sprite.GetTint();
 	SDL_SetTextureColorMod(sdlSprite.GetTexture(), color.r, color.g, color.b);
 	Rect spriteRect = sdlSprite.GetRect();
-	SDL_FRect destRect = {spriteRect.x, spriteRect.y, spriteRect.w, spriteRect.h};
+	SDL_FRect destRect = { spriteRect.x, spriteRect.y, spriteRect.w, spriteRect.h };
 	SDL_RenderTexture(m_Renderer, sdlSprite.GetTexture(), NULL, &destRect);
 }
 

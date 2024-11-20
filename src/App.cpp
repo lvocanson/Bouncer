@@ -48,10 +48,9 @@ int App::Run()
 			fpsTimer--;
 		}
 		m_Window->Draw(fpsText);
-
 		m_Window->EndDraw();
 
-		deltaTime = m_Window->Update();
+		deltaTime = m_Window->Update(m_Sprites);
 	}
 	return 0;
 }

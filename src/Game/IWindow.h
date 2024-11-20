@@ -1,5 +1,6 @@
 #pragma once
 #include "Utils/MyColor.h"
+#include <vector>
 
 class Sprite;
 class Text;
@@ -13,7 +14,7 @@ public:
 	virtual bool IsOpen() = 0;
 
 	// Returns deltaTime
-	virtual float Update() = 0;
+	virtual float Update(std::vector<Sprite*>& sprites) = 0;
 
 	virtual void SetFont(const char* path, float size) = 0;
 
