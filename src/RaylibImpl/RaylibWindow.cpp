@@ -4,6 +4,8 @@
 
 void RaylibWindow::Create(const char* title, int width, int height)
 {
+	SetConfigFlags(FLAG_WINDOW_RESIZABLE);
+
 	InitWindow(width, height, title);
 }
 
