@@ -134,12 +134,12 @@ Sprite* SdlWindow::CreateSprite()
 
 void SdlWindow::Draw(Sprite& sprite)
 {
-	auto& sdlSprite = (SdlSprite&)sprite;
+	auto texture = reinterpret_cast<SDL_Texture*>(sprite.GetData());
 	MyColor color = sprite.GetTint();
-	SDL_SetTextureColorMod(sdlSprite.GetTexture(), color.r, color.g, color.b);
-	Rect spriteRect = sdlSprite.GetRect();
+	SDL_SetTextureColorMod(texture, color.r, color.g, color.b);
+	Rect spriteRect = sprite.GetRect();
 	SDL_FRect destRect = { spriteRect.x, spriteRect.y, spriteRect.w, spriteRect.h };
-	SDL_RenderTexture(m_Renderer, sdlSprite.GetTexture(), NULL, &destRect);
+	SDL_RenderTexture(m_Renderer, texture, NULL, &destRect);
 }
 
 void SdlWindow::Draw(Text& text)

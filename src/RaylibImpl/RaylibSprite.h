@@ -7,7 +7,7 @@ class RaylibSprite : public Sprite
 public:
 
 	void LoadImage(const char* path) override;
-	Texture2D GetTexture() { return m_Text; }
+	void* GetData() override;
 
 private:
 

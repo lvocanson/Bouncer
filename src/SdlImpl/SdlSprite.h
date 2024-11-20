@@ -10,8 +10,7 @@ public:
 
 	SdlSprite(SDL_Renderer* renderer);
 	void LoadImage(const char* path) override;
-
-	SDL_Texture* GetTexture() { return m_Texture; }
+	void* GetData() override;
 
 private:
 

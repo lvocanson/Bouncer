@@ -23,3 +23,8 @@ void SdlSprite::LoadImage(const char* path)
 		return;
 	}
 }
+
+void* SdlSprite::GetData()
+{
+	return m_Texture;
+}

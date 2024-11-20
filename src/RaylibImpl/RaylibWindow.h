@@ -21,6 +21,7 @@ public:
 	Sprite* CreateSprite() override;
 	void Draw(Sprite&) override;
 	void Draw(Text&) override;
+
 	int GetWidth() override;
 	int GetHeight() override;
 

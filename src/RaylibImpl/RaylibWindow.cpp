@@ -63,12 +63,11 @@ Sprite* RaylibWindow::CreateSprite()
 
 void RaylibWindow::Draw(Sprite& sprite)
 {
-	auto& raylibSprite = (RaylibSprite&)sprite;
-	auto texture = raylibSprite.GetTexture();
-	Rect spriteRect = raylibSprite.GetRect();
+	auto texture = reinterpret_cast<Texture2D*>(sprite.GetData());
+	Rect spriteRect = sprite.GetRect();
 	Rectangle destRect = {spriteRect.x, spriteRect.y, spriteRect.w, spriteRect.h};
 	MyColor color = sprite.GetTint();
-	DrawTexturePro(texture, {0.0f, 0.0f, (float)texture.width, (float)texture.height}, destRect, {0,0}, 0.0f, {color.r, color.g, color.b, color.a});
+	DrawTexturePro(*texture, {0.0f, 0.0f, (float)texture->width, (float)texture->height}, destRect, {0,0}, 0.0f, {color.r, color.g, color.b, color.a});
 }
 
 void RaylibWindow::Draw(Text& text)

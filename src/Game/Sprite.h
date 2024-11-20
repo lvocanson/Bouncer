@@ -8,6 +8,7 @@ class Sprite : public GameElement
 public:
 
 	virtual void LoadImage(const char* path) = 0;
+	virtual void* GetData() = 0;
 
 	void SetSize(Vec2 size) { m_Size = size; }
 	Vec2 GetSize() const { return m_Size; }
