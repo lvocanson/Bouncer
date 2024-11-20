@@ -59,7 +59,7 @@ bool SdlWindow::IsOpen()
 	return m_Window != nullptr;
 }
 
-float SdlWindow::Update(std::vector<Sprite*>& sprites)
+float SdlWindow::Update()
 {
 	SDL_Event event;
 	while (SDL_PollEvent(&event))
@@ -68,22 +68,6 @@ float SdlWindow::Update(std::vector<Sprite*>& sprites)
 		{
 		case SDL_EVENT_QUIT:
 			Quit();
-			break;
-		case SDL_EVENT_MOUSE_BUTTON_DOWN:
-			if (event.button.button == SDL_BUTTON_LEFT)
-			{
-				float mouseX, mouseY;
-				SDL_GetMouseState(&mouseX, &mouseY);
-
-				for (int i = 0; i < sprites.size(); i++)
-				{
-					bool test = mouseX >= sprites[i]->GetPosition().x && mouseX <= sprites[i]->GetPosition().x + sprites[i]->GetSize().x && mouseY >= mouseX <= sprites[i]->GetPosition().y && mouseY <= mouseX <= sprites[i]->GetPosition().y + sprites[i]->GetSize().y;
-					if (test)
-					{
-						sprites.erase(sprites.begin() + i);
-					}
-				}
-			}
 			break;
 		}
 	}

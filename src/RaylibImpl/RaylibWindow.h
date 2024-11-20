@@ -10,7 +10,7 @@ public:
 	void Quit() override;
 	bool IsOpen() override;
 
-	float Update(std::vector<Sprite*>& sprites) override;
+	float Update() override;
 
 	void SetFont(const char* path, float size) override;
 

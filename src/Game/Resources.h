@@ -9,7 +9,8 @@ namespace Resources
 	static constexpr int WindowHeight = 900;
 
 	static constexpr auto SpriteTexPath = "res/Circle.png";
-	static constexpr int SpriteNumber = 10;
+	static constexpr size_t StartingSpriteNumber = 10;
+	static constexpr size_t MaxSpriteNumber = 50;
 	static constexpr float MinSpriteSize = 50;
 	static constexpr float MaxSpriteSize = 150;
 	static constexpr float MinSpriteSpeed = 50;
@@ -18,7 +19,12 @@ namespace Resources
 	static constexpr auto FontPath = "res/Holen Vintage.otf";
 	static constexpr auto FontSize = 12;
 
+	static constexpr float MinIntervalBetweenSpawns = 0.2f;
+	static constexpr float MaxIntervalBetweenSpawns = 1.f;
+	static constexpr float TimeToReachMinInterval = 60.f;
+
 	static constexpr MyColor BackgroundColor = {15, 15, 15};
 	static constexpr MyColor FpsTextColor = {255, 255, 255, 127};
 	static constexpr Vec2 FpsTextPosition = {10, 10};
+	static constexpr float FpsUpdateInterval = 1.f;
 }

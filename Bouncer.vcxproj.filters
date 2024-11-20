@@ -11,6 +11,8 @@
     <ClCompile Include="src\RaylibImpl\RaylibSprite.h" />
     <ClCompile Include="src\RaylibImpl\RaylibSprite.cpp" />
     <ClCompile Include="src\Utils\LibraryPicker.cpp" />
+    <ClCompile Include="src\SdlImpl\SdlMouseInput.cpp" />
+    <ClCompile Include="src\RaylibImpl\RaylibMouseInput.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Game\IWindow.h" />
@@ -27,5 +29,8 @@
     <ClInclude Include="src\Utils\Rect.h" />
     <ClInclude Include="src\Utils\MyColor.h" />
     <ClInclude Include="src\Game\Text.h" />
+    <ClInclude Include="src\Game\IMouseInput.h" />
+    <ClInclude Include="src\SdlImpl\SdlMouseInput.h" />
+    <ClInclude Include="src\RaylibImpl\RaylibMouseInput.h" />
   </ItemGroup>
 </Project>
