@@ -91,6 +91,7 @@ int App::Run()
 		m_DeltaTime = m_Window->Update();
 		m_ElapsedTime += m_DeltaTime;
 	}
+
 	return 0;
 }
 

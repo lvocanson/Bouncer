@@ -26,7 +26,6 @@ default: \
 	return nullptr; \
 } 
 
-
 IWindow* ObjectMaker::MakeWindow()
 {
 	SWITCH_ON(Window);
@@ -51,3 +50,5 @@ TexturePtr* ObjectMaker::MakeTexturePtr()
 {
 	SWITCH_ON(TexturePtr);
 }
+
+#undef SWITCH_ON

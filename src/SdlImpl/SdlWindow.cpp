@@ -100,21 +100,51 @@ void SdlWindow::Clear(MyColor color)
 void SdlWindow::Draw(Sprite& sprite)
 {
 	auto surface = sprite.GetTexture()->As<SDL_Surface>();
-	auto texture = SDL_CreateTextureFromSurface(m_Renderer, surface);
+	SDL_Texture* texture = m_CachedTexture;
+	if (surface != m_CachedSurface)
+	{
+		SDL_DestroyTexture(m_CachedTexture);
+		texture = SDL_CreateTextureFromSurface(m_Renderer, surface);
+		m_CachedSurface = surface;
+		m_CachedTexture = texture;
+	}
+
 	MyColor color = sprite.GetTint();
 	SDL_SetTextureColorMod(texture, color.r, color.g, color.b);
 	Rect spriteRect = sprite.GetRect();
 	SDL_FRect destRect = {spriteRect.x, spriteRect.y, spriteRect.w, spriteRect.h};
+
 	SDL_RenderTexture(m_Renderer, texture, NULL, &destRect);
-	SDL_DestroyTexture(texture);
 }
 
 void SdlWindow::Draw(Text& text, FontPtr& fontPtr)
 {
-	auto ttfText = TTF_CreateText(m_Engine, fontPtr.As<TTF_Font>(), text.GetText().c_str(), 0);
-	if (ttfText == NULL)
+	auto& string = text.GetText();
+
+	TTF_Text* ttfText;
+	if (string == m_CachedStrings[0])
 	{
-		SDL_LogError(0, "Create Text failed: %s", SDL_GetError());
+		ttfText = m_CachedTexts[0];
+	}
+	else if (string == m_CachedStrings[1])
+	{
+		ttfText = m_CachedTexts[1];
+	}
+	else
+	{
+		ttfText = m_CachedTexts[0];
+		m_CachedTexts[0] = TTF_CreateText(m_Engine, fontPtr.As<TTF_Font>(), string.c_str(), 0);
+		if (ttfText == NULL)
+		{
+			SDL_LogError(0, "Create Text failed: %s", SDL_GetError());
+		}
+
+		TTF_DestroyText(m_CachedTexts[1]);
+		m_CachedTexts[1] = ttfText;
+		ttfText = m_CachedTexts[0];
+
+		m_CachedStrings[1] = m_CachedStrings[0];
+		m_CachedStrings[0] = string;
 	}
 
 	Vec2 pos = text.GetPosition();
@@ -125,8 +155,6 @@ void SdlWindow::Draw(Text& text, FontPtr& fontPtr)
 	{
 		SDL_LogError(0, "Draw text failed: %s", SDL_GetError());
 	}
-
-	TTF_DestroyText(ttfText);
 }
 
 int SdlWindow::GetWidth()

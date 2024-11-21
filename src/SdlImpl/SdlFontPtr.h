@@ -1,9 +1,6 @@
 #pragma once
 #include "Game/FontPtr.h"
 
-struct SDL_Renderer;
-struct TTF_TextEngine;
-
 class SdlFontPtr : public FontPtr
 {
 public:
