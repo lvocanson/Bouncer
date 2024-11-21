@@ -6,20 +6,18 @@
     <ClCompile Include="src\Utils\ObjectMaker.cpp" />
     <ClCompile Include="src\App.cpp" />
     <ClCompile Include="src\SdlImpl\SdlWindow.cpp" />
-    <ClCompile Include="src\SdlImpl\SdlSprite.cpp" />
     <ClCompile Include="src\RaylibImpl\RaylibWindow.cpp" />
-    <ClCompile Include="src\RaylibImpl\RaylibSprite.h" />
-    <ClCompile Include="src\RaylibImpl\RaylibSprite.cpp" />
     <ClCompile Include="src\Utils\LibraryPicker.cpp" />
     <ClCompile Include="src\SdlImpl\SdlMouseInput.cpp" />
     <ClCompile Include="src\RaylibImpl\RaylibMouseInput.cpp" />
+    <ClCompile Include="src\RaylibImpl\RaylibTexturePtr.cpp" />
+    <ClCompile Include="src\SdlImpl\SdlTexturePtr.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Game\IWindow.h" />
     <ClInclude Include="src\Utils\ObjectMaker.h" />
     <ClInclude Include="src\App.h" />
     <ClInclude Include="src\SdlImpl\SdlWindow.h" />
-    <ClInclude Include="src\SdlImpl\SdlSprite.h" />
     <ClInclude Include="src\Game\Resources.h" />
     <ClInclude Include="src\RaylibImpl\RaylibWindow.h" />
     <ClInclude Include="src\Utils\LibraryPicker.h" />
@@ -32,6 +30,8 @@
     <ClInclude Include="src\Game\IMouseInput.h" />
     <ClInclude Include="src\SdlImpl\SdlMouseInput.h" />
     <ClInclude Include="src\RaylibImpl\RaylibMouseInput.h" />
-    <ClInclude Include="src\Game\MyTexture.h" />
+    <ClInclude Include="src\Game\TexturePtr.h" />
+    <ClInclude Include="src\RaylibImpl\RaylibTexturePtr.h" />
+    <ClInclude Include="src\SdlImpl\SdlTexturePtr.h" />
   </ItemGroup>
 </Project>

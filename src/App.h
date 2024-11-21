@@ -1,12 +1,13 @@
 #pragma once
 #include "Utils/ObjectMaker.h"
 #include "Game/Resources.h"
+#include "Game/Sprite.h"
 #include "Game/Text.h"
 #include <array>
 
 class IWindow;
-class Sprite;
 class IMouseInput;
+class TexturePtr;
 
 class App
 {
@@ -18,7 +19,7 @@ public:
 
 private:
 
-	void RandomizeSprite(Sprite*);
+	void RandomizeSprite(Sprite&);
 	void TryToSpawnSprite();
 	void UpdateSprites();
 	void UpdateFpsText();
@@ -29,7 +30,8 @@ private:
 	IMouseInput* m_Input;
 	Text m_FpsText;
 	Text m_ScoreText;
-	std::array<Sprite*, Resources::MaxSpriteNumber> m_Sprites;
+	TexturePtr* m_Texture;
+	std::array<Sprite, Resources::MaxSpriteNumber> m_Sprites;
 
 	float m_ElapsedTime = 0;
 	float m_DeltaTime = 0;

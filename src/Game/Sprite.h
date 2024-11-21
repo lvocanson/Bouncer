@@ -1,15 +1,16 @@
 #pragma once
 #include "GameElement.h"
-#include "MyTexture.h"
 #include "Utils/MyColor.h"
 #include "Utils/Rect.h"
+
+class TexturePtr;
 
 class Sprite : public GameElement
 {
 public:
 
-	virtual void LoadImage(const char* path) = 0;
-	virtual MyTexture* GetTexture() = 0;
+	void SetTexture(TexturePtr* tex) { m_Texture = tex; }
+	TexturePtr* GetTexture() const { return m_Texture; }
 
 	void SetSize(Vec2 size) { m_Size = size; }
 	Vec2 GetSize() const { return m_Size; }
@@ -25,6 +26,7 @@ public:
 
 protected:
 
+	TexturePtr* m_Texture = nullptr;
 	Vec2 m_Size{0, 0};
 	Vec2 m_Velocity{0, 0};
 	MyColor m_Tint{0xFFFFFFFF};

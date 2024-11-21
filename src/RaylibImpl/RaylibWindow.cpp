@@ -1,5 +1,6 @@
 #include "RaylibWindow.h"
-#include "RaylibSprite.h"
+#include "RaylibTexturePtr.h"
+#include "Game/Sprite.h"
 #include "Game/Text.h"
 
 void RaylibWindow::Create(const char* title, int width, int height)
@@ -46,14 +47,14 @@ void RaylibWindow::Clear(MyColor color)
 	ClearBackground({color.r, color.g, color.b, color.a});
 }
 
-Sprite* RaylibWindow::CreateSprite()
+TexturePtr* RaylibWindow::CreateTexture()
 {
-	return new RaylibSprite();
+	return new RaylibTexturePtr();
 }
 
 void RaylibWindow::Draw(Sprite& sprite)
 {
-	auto texture = reinterpret_cast<Texture2D*>(sprite.GetTexture());
+	auto texture = sprite.GetTexture()->As<Texture>();
 	Rect spriteRect = sprite.GetRect();
 	Rectangle destRect = {spriteRect.x, spriteRect.y, spriteRect.w, spriteRect.h};
 	MyColor color = sprite.GetTint();
@@ -64,7 +65,7 @@ void RaylibWindow::Draw(Text& text)
 {
 	Vec2 pos = text.GetPosition();
 	MyColor color = text.GetColor();
-	DrawTextEx(m_Font,text.GetText().c_str(), { pos.x, pos.y }, m_FontSize,0, Color(color.r, color.g, color.b, color.a));
+	DrawTextEx(m_Font, text.GetText().c_str(), {pos.x, pos.y}, m_FontSize, 0, Color(color.r, color.g, color.b, color.a));
 }
 
 int RaylibWindow::GetWidth()

@@ -148,12 +148,11 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="src\RaylibImpl\RaylibMouseInput.cpp" />
+    <ClCompile Include="src\RaylibImpl\RaylibTexturePtr.cpp" />
     <ClCompile Include="src\SdlImpl\SdlMouseInput.cpp" />
+    <ClCompile Include="src\SdlImpl\SdlTexturePtr.cpp" />
     <ClCompile Include="src\Utils\LibraryPicker.cpp" />
-    <ClCompile Include="src\RaylibImpl\RaylibSprite.cpp" />
-    <ClCompile Include="src\RaylibImpl\RaylibSprite.h" />
     <ClCompile Include="src\RaylibImpl\RaylibWindow.cpp" />
-    <ClCompile Include="src\SdlImpl\SdlSprite.cpp" />
     <ClCompile Include="src\SdlImpl\SdlWindow.cpp" />
     <ClCompile Include="src\App.cpp" />
     <ClCompile Include="src\main.cpp" />
@@ -164,9 +163,11 @@
     <ClInclude Include="src\Game\GameElement.h" />
     <ClInclude Include="src\Game\IMouseInput.h" />
     <ClInclude Include="src\Game\Text.h" />
-    <ClInclude Include="src\Game\MyTexture.h" />
+    <ClInclude Include="src\Game\TexturePtr.h" />
     <ClInclude Include="src\RaylibImpl\RaylibMouseInput.h" />
+    <ClInclude Include="src\RaylibImpl\RaylibTexturePtr.h" />
     <ClInclude Include="src\SdlImpl\SdlMouseInput.h" />
+    <ClInclude Include="src\SdlImpl\SdlTexturePtr.h" />
     <ClInclude Include="src\Utils\MyColor.h" />
     <ClInclude Include="src\Utils\LibraryPicker.h" />
     <ClInclude Include="src\Utils\RandomHelper.h" />
@@ -174,7 +175,6 @@
     <ClInclude Include="src\Utils\Vec2.h" />
     <ClInclude Include="src\RaylibImpl\RaylibWindow.h" />
     <ClInclude Include="src\Game\Resources.h" />
-    <ClInclude Include="src\SdlImpl\SdlSprite.h" />
     <ClInclude Include="src\SdlImpl\SdlWindow.h" />
     <ClInclude Include="src\App.h" />
     <ClInclude Include="src\Game\IWindow.h" />

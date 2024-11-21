@@ -1,5 +1,6 @@
 #include "SdlWindow.h"
-#include "SdlSprite.h"
+#include "SdlTexturePtr.h"
+#include "Game/Sprite.h"
 #include "Game/Text.h"
 #include <SDL3/SDL.h>
 #include <SDL3_ttf/SDL_ttf.h>
@@ -111,14 +112,14 @@ void SdlWindow::Clear(MyColor color)
 	SDL_RenderClear(m_Renderer);
 }
 
-Sprite* SdlWindow::CreateSprite()
+TexturePtr* SdlWindow::CreateTexture()
 {
-	return new SdlSprite(m_Renderer);
+	return new SdlTexturePtr(m_Renderer);
 }
 
 void SdlWindow::Draw(Sprite& sprite)
 {
-	auto texture = reinterpret_cast<SDL_Texture*>(sprite.GetTexture());
+	auto texture = sprite.GetTexture()->As<SDL_Texture>();
 	MyColor color = sprite.GetTint();
 	SDL_SetTextureColorMod(texture, color.r, color.g, color.b);
 	Rect spriteRect = sprite.GetRect();
