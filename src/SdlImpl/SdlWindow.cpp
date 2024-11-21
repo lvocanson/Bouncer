@@ -1,8 +1,8 @@
 #include "SdlWindow.h"
-#include "SdlTexturePtr.h"
-#include "SdlFontPtr.h"
+#include "Game/FontPtr.h"
 #include "Game/Sprite.h"
 #include "Game/Text.h"
+#include "Game/TexturePtr.h"
 #include <SDL3/SDL.h>
 #include <SDL3_ttf/SDL_ttf.h>
 
@@ -97,19 +97,16 @@ void SdlWindow::Clear(MyColor color)
 	SDL_RenderClear(m_Renderer);
 }
 
-TexturePtr* SdlWindow::CreateTexture()
-{
-	return new SdlTexturePtr(m_Renderer);
-}
-
 void SdlWindow::Draw(Sprite& sprite)
 {
-	auto texture = sprite.GetTexture()->As<SDL_Texture>();
+	auto surface = sprite.GetTexture()->As<SDL_Surface>();
+	auto texture = SDL_CreateTextureFromSurface(m_Renderer, surface);
 	MyColor color = sprite.GetTint();
 	SDL_SetTextureColorMod(texture, color.r, color.g, color.b);
 	Rect spriteRect = sprite.GetRect();
 	SDL_FRect destRect = {spriteRect.x, spriteRect.y, spriteRect.w, spriteRect.h};
 	SDL_RenderTexture(m_Renderer, texture, NULL, &destRect);
+	SDL_DestroyTexture(texture);
 }
 
 void SdlWindow::Draw(Text& text, FontPtr& fontPtr)

@@ -3,10 +3,12 @@
 #include "SdlImpl/SdlMouseInput.h"
 #include "SdlImpl/SdlLogger.h"
 #include "SdlImpl/SdlFontPtr.h"
+#include "SdlImpl/SdlTexturePtr.h"
 #include "RaylibImpl/RaylibWindow.h"
 #include "RaylibImpl/RaylibMouseInput.h"
 #include "RaylibImpl/RaylibLogger.h"
 #include "RaylibImpl/RaylibFontPtr.h"
+#include "RaylibImpl/RaylibTexturePtr.h"
 
 ObjectMaker::ObjectMaker(Lib library)
 	: m_Library(library)
@@ -43,4 +45,9 @@ Logger* ObjectMaker::MakeLogger()
 FontPtr* ObjectMaker::MakeFontPtr()
 {
 	SWITCH_ON(FontPtr);
+}
+
+TexturePtr* ObjectMaker::MakeTexturePtr()
+{
+	SWITCH_ON(TexturePtr);
 }

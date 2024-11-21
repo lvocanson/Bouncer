@@ -39,7 +39,7 @@ App::App(Lib libToUse)
 	m_ScoreText.SetColor(Resources::OnScreenTextColor);
 	logger->Log(Logger::Info, "Score text setup");
 
-	m_Texture = m_Window->CreateTexture();
+	m_Texture = m_Maker.MakeTexturePtr();
 	m_Texture->LoadFromFile(Resources::SpriteTexPath);
 	logger->Log(Logger::Info, "Sprite texture loaded");
 

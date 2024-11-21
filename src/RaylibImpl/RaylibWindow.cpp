@@ -1,8 +1,8 @@
 #include "RaylibWindow.h"
-#include "RaylibTexturePtr.h"
-#include "RaylibFontPtr.h"
+#include "Game/FontPtr.h"
 #include "Game/Sprite.h"
 #include "Game/Text.h"
+#include "Game/TexturePtr.h"
 
 void RaylibWindow::Create(const char* title, int width, int height)
 {
@@ -38,11 +38,6 @@ void RaylibWindow::EndDraw()
 void RaylibWindow::Clear(MyColor color)
 {
 	ClearBackground({color.r, color.g, color.b, color.a});
-}
-
-TexturePtr* RaylibWindow::CreateTexture()
-{
-	return new RaylibTexturePtr();
 }
 
 void RaylibWindow::Draw(Sprite& sprite)

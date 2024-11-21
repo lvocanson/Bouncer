@@ -5,6 +5,7 @@ class IWindow;
 class IMouseInput;
 class Logger;
 class FontPtr;
+class TexturePtr;
 
 // Only class that has the responsability to choose between implementations
 class ObjectMaker
@@ -17,6 +18,7 @@ public:
 	IMouseInput* MakeMouseInput();
 	Logger* MakeLogger();
 	FontPtr* MakeFontPtr();
+	TexturePtr* MakeTexturePtr();
 
 private:
 
