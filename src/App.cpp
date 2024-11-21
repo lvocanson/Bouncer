@@ -139,7 +139,6 @@ void App::UpdateSprites()
 		Vec2 velocity = sprite->GetVelocity();
 
 		{
-
 			float cy = spriteRect.y + spriteRect.h / 2.f;
 			float cx = spriteRect.x + spriteRect.w / 2.f;
 			float a = spriteRect.w / 2.f;

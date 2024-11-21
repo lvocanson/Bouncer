@@ -1,5 +1,6 @@
 #pragma once
 #include "GameElement.h"
+#include "MyTexture.h"
 #include "Utils/MyColor.h"
 #include "Utils/Rect.h"
 
@@ -8,7 +9,7 @@ class Sprite : public GameElement
 public:
 
 	virtual void LoadImage(const char* path) = 0;
-	virtual void* GetData() = 0;
+	virtual MyTexture* GetTexture() = 0;
 
 	void SetSize(Vec2 size) { m_Size = size; }
 	Vec2 GetSize() const { return m_Size; }

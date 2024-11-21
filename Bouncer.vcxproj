@@ -164,6 +164,7 @@
     <ClInclude Include="src\Game\GameElement.h" />
     <ClInclude Include="src\Game\IMouseInput.h" />
     <ClInclude Include="src\Game\Text.h" />
+    <ClInclude Include="src\Game\MyTexture.h" />
     <ClInclude Include="src\RaylibImpl\RaylibMouseInput.h" />
     <ClInclude Include="src\SdlImpl\SdlMouseInput.h" />
     <ClInclude Include="src\Utils\MyColor.h" />

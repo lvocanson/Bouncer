@@ -118,7 +118,7 @@ Sprite* SdlWindow::CreateSprite()
 
 void SdlWindow::Draw(Sprite& sprite)
 {
-	auto texture = reinterpret_cast<SDL_Texture*>(sprite.GetData());
+	auto texture = reinterpret_cast<SDL_Texture*>(sprite.GetTexture());
 	MyColor color = sprite.GetTint();
 	SDL_SetTextureColorMod(texture, color.r, color.g, color.b);
 	Rect spriteRect = sprite.GetRect();

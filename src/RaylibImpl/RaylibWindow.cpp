@@ -53,7 +53,7 @@ Sprite* RaylibWindow::CreateSprite()
 
 void RaylibWindow::Draw(Sprite& sprite)
 {
-	auto texture = reinterpret_cast<Texture2D*>(sprite.GetData());
+	auto texture = reinterpret_cast<Texture2D*>(sprite.GetTexture());
 	Rect spriteRect = sprite.GetRect();
 	Rectangle destRect = {spriteRect.x, spriteRect.y, spriteRect.w, spriteRect.h};
 	MyColor color = sprite.GetTint();

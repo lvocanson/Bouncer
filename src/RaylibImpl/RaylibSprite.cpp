@@ -6,7 +6,7 @@ void RaylibSprite::LoadImage(const char* path)
 	SetTextureWrap(m_Text, TEXTURE_WRAP_CLAMP);
 }
 
-void* RaylibSprite::GetData()
+MyTexture* RaylibSprite::GetTexture()
 {
 	return &m_Text;
 }

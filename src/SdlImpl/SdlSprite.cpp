@@ -24,7 +24,7 @@ void SdlSprite::LoadImage(const char* path)
 	}
 }
 
-void* SdlSprite::GetData()
+MyTexture* SdlSprite::GetTexture()
 {
 	return m_Texture;
 }
