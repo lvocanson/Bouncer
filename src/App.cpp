@@ -32,11 +32,7 @@ App::App(Lib libToUse)
 		auto& sprite = m_Sprites[i];
 		sprite.SetTexture(m_Texture);
 		RandomizeSprite(sprite);
-
-		if (i >= Resources::StartingSpriteNumber)
-		{
-			sprite.SetVisible(false);
-		}
+		sprite.SetVisible(i < Resources::StartingSpriteNumber);
 	}
 }
 
