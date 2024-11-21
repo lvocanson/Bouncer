@@ -13,4 +13,5 @@ void SdlTexturePtr::LoadFromFile(const char* path)
 void SdlTexturePtr::Unload()
 {
 	SDL_DestroySurface(As<SDL_Surface>());
+	m_Ptr = nullptr;
 }

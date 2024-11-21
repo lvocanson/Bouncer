@@ -6,6 +6,13 @@
 #include <SDL3/SDL.h>
 #include <SDL3_ttf/SDL_ttf.h>
 
+SdlWindow::~SdlWindow()
+{
+	TTF_Quit();
+	SDL_Quit();
+	SDL_LogInfo(SDL_LOG_CATEGORY_APPLICATION, "SDL quitted");
+}
+
 void SdlWindow::Create(const char* title, int width, int height)
 {
 	if (!SDL_InitSubSystem(SDL_INIT_VIDEO))
@@ -53,9 +60,6 @@ void SdlWindow::Quit()
 
 	SDL_DestroyWindow(m_Window);
 	m_Window = nullptr;
-
-	TTF_Quit();
-	SDL_Quit();
 }
 
 bool SdlWindow::IsOpen()
@@ -134,14 +138,14 @@ void SdlWindow::Draw(Text& text, FontPtr& fontPtr)
 	{
 		ttfText = m_CachedTexts[0];
 		m_CachedTexts[0] = TTF_CreateText(m_Engine, fontPtr.As<TTF_Font>(), string.c_str(), 0);
-		if (ttfText == NULL)
-		{
-			SDL_LogError(0, "Create Text failed: %s", SDL_GetError());
-		}
 
 		TTF_DestroyText(m_CachedTexts[1]);
 		m_CachedTexts[1] = ttfText;
 		ttfText = m_CachedTexts[0];
+		if (ttfText == NULL)
+		{
+			SDL_LogError(0, "Create Text failed: %s", SDL_GetError());
+		}
 
 		m_CachedStrings[1] = m_CachedStrings[0];
 		m_CachedStrings[0] = string;

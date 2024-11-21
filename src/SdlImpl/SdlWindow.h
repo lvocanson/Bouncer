@@ -15,6 +15,8 @@ class SdlWindow : public IWindow
 {
 public:
 
+	~SdlWindow();
+
 	void Create(const char* title, int width, int height) override;
 	void Quit() override;
 	bool IsOpen() override;

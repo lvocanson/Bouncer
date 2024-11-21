@@ -13,6 +13,7 @@ void SdlFontPtr::LoadFromFile(const char* path)
 void SdlFontPtr::Unload()
 {
 	TTF_CloseFont(As<TTF_Font>());
+	m_Ptr = nullptr;
 }
 
 void SdlFontPtr::SetSize(float size)

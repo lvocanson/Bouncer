@@ -11,6 +11,8 @@ class IWindow
 {
 public:
 
+	virtual ~IWindow() = default;
+
 	virtual void Create(const char* title, int width, int height) = 0;
 	virtual void Quit() = 0;
 	virtual bool IsOpen() = 0;
