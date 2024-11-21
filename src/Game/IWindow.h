@@ -2,6 +2,7 @@
 #include "Utils/MyColor.h"
 #include <vector>
 
+class TexturePtr;
 class Sprite;
 class Text;
 
@@ -22,7 +23,7 @@ public:
 	virtual void EndDraw() = 0;
 	virtual void Clear(MyColor color) = 0;
 	
-	virtual Sprite* CreateSprite() = 0;
+	virtual TexturePtr* CreateTexture() = 0;
 	virtual void Draw(Sprite&) = 0;
 	virtual void Draw(Text&) = 0;
 

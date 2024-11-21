@@ -22,7 +22,7 @@ public:
 	void EndDraw() override;
 	void Clear(MyColor color) override;
 	
-	Sprite* CreateSprite() override;
+	TexturePtr* CreateTexture() override;
 	void Draw(Sprite&) override;
 	void Draw(Text&) override;
 

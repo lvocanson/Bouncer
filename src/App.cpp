@@ -1,7 +1,7 @@
 #include "App.h"
 #include "Game/IWindow.h"
 #include "Game/IMouseInput.h"
-#include "Game/Sprite.h"
+#include "Game/TexturePtr.h"
 #include "Utils/RandomHelper.h"
 #include <format>
 
@@ -24,23 +24,25 @@ App::App(Lib libToUse)
 	m_ScoreText.SetPosition(Resources::ScoreTextPosition);
 	m_ScoreText.SetColor(Resources::OnScreenTextColor);
 
-	m_Sprites.fill(nullptr);
-	for (size_t i = 0; i < Resources::StartingSpriteNumber; i++)
+	m_Texture = m_Window->CreateTexture();
+	m_Texture->LoadFromFile(Resources::SpriteTexPath);
+
+	for (size_t i = 0; i < m_Sprites.size(); i++)
 	{
-		auto sprite = m_Window->CreateSprite();
-		sprite->LoadImage(Resources::SpriteTexPath);
+		auto& sprite = m_Sprites[i];
+		sprite.SetTexture(m_Texture);
 		RandomizeSprite(sprite);
-		m_Sprites[i] = sprite;
+
+		if (i >= Resources::StartingSpriteNumber)
+		{
+			sprite.SetVisible(false);
+		}
 	}
 }
 
 App::~App()
 {
-	for (auto sprite : m_Sprites)
-	{
-		delete sprite;
-	}
-	m_Sprites.fill(nullptr);
+	m_Texture->Unload();
 
 	delete m_Window;
 	m_Window = nullptr;
@@ -59,9 +61,9 @@ int App::Run()
 
 		m_Window->BeginDraw();
 		m_Window->Clear(Resources::BackgroundColor);
-		for (auto sprite : m_Sprites)
+		for (auto& sprite : m_Sprites)
 		{
-			if (sprite && sprite->IsVisible()) m_Window->Draw(*sprite);
+			if (sprite.IsVisible()) m_Window->Draw(sprite);
 		}
 		m_Window->Draw(m_FpsText);
 		m_Window->Draw(m_ScoreText);
@@ -75,19 +77,19 @@ int App::Run()
 	return 0;
 }
 
-void App::RandomizeSprite(Sprite* sprite)
+void App::RandomizeSprite(Sprite& sprite)
 {
 	float size = Randf(Resources::MinSpriteSize, Resources::MaxSpriteSize);
-	sprite->SetSize({size, size});
+	sprite.SetSize({size, size});
 
 	float x = Randf(0, m_Window->GetWidth() - size);
 	float y = Randf(0, m_Window->GetHeight() - size);
-	sprite->SetPosition({x, y});
+	sprite.SetPosition({x, y});
 
 	float speed = Randf(Resources::MinSpriteSpeed, Resources::MaxSpriteSpeed);
-	sprite->SetVelocity(RandUnitVec() * speed);
+	sprite.SetVelocity(RandUnitVec() * speed);
 
-	sprite->SetTint(RandColor());
+	sprite.SetTint(RandColor());
 }
 
 void App::TryToSpawnSprite()
@@ -101,24 +103,12 @@ void App::TryToSpawnSprite()
 	{
 		m_SpawnTimer -= spawnInterval;
 
-		for (size_t i = 0; i < m_Sprites.size(); i++)
+		for (auto& sprite : m_Sprites)
 		{
-			auto sprite = m_Sprites[i];
-			if (!sprite)
+			if (!sprite.IsVisible())
 			{
-				// All sprites enabled but there is place for new
-				sprite = m_Window->CreateSprite();
-				sprite->LoadImage(Resources::SpriteTexPath);
 				RandomizeSprite(sprite);
-				m_Sprites[i] = sprite;
-				return;
-			}
-
-			if (!sprite->IsVisible())
-			{
-				// Found a disabled sprite
-				RandomizeSprite(sprite);
-				sprite->SetVisible(true);
+				sprite.SetVisible(true);
 				return;
 			}
 		}
@@ -127,16 +117,16 @@ void App::TryToSpawnSprite()
 
 void App::UpdateSprites()
 {
-	for (auto sprite : m_Sprites)
+	for (auto& sprite : m_Sprites)
 	{
-		if (!sprite || !sprite->IsVisible())
+		if (!sprite.IsVisible())
 		{
 			continue;
 		}
 
-		sprite->ApplyVelocity(m_DeltaTime);
-		Rect spriteRect = sprite->GetRect();
-		Vec2 velocity = sprite->GetVelocity();
+		sprite.ApplyVelocity(m_DeltaTime);
+		Rect spriteRect = sprite.GetRect();
+		Vec2 velocity = sprite.GetVelocity();
 
 		{
 			float cy = spriteRect.y + spriteRect.h / 2.f;
@@ -148,7 +138,7 @@ void App::UpdateSprites()
 			if (m_Input->GetMouseState(mousePosition) && // Ellipsis hitbox
 				((mousePosition.x - cx) * (mousePosition.x - cx)) / (a * a) + ((mousePosition.y - cy) * (mousePosition.y - cy)) / (b * b) <= 1.0f)
 			{
-				sprite->SetVisible(false);
+				sprite.SetVisible(false);
 				m_Score++;
 				m_ScoreText.SetText(std::format("Score: {}", m_Score));
 				continue;
@@ -182,8 +172,8 @@ void App::UpdateSprites()
 			}
 		}
 
-		sprite->SetVelocity(velocity);
-		sprite->SetPosition(spriteRect.position);
+		sprite.SetVelocity(velocity);
+		sprite.SetPosition(spriteRect.position);
 	}
 }
 
