@@ -81,8 +81,6 @@ int App::Run()
 
 		m_DeltaTime = m_Window->Update();
 		m_ElapsedTime += m_DeltaTime;
-		m_SpawnTimer += m_DeltaTime;
-		m_FpsUpdatTimer += m_DeltaTime;
 	}
 	return 0;
 }
@@ -104,24 +102,25 @@ void App::RandomizeSprite(Sprite& sprite)
 
 void App::TryToSpawnSprite()
 {
-	float spawnInterval = std::lerp(
-		Resources::MaxIntervalBetweenSpawns,
-		Resources::MinIntervalBetweenSpawns,
-		m_ElapsedTime / Resources::TimeToReachMinInterval);
-
-	while (m_SpawnTimer > spawnInterval)
+	float spawnInterval = Resources::MinIntervalBetweenSpawns;
+	if (m_ElapsedTime < Resources::TimeToReachMinInterval)
 	{
-		m_SpawnTimer -= spawnInterval;
+		spawnInterval = Resources::MaxIntervalBetweenSpawns + (m_ElapsedTime / Resources::TimeToReachMinInterval) * (Resources::MinIntervalBetweenSpawns - Resources::MaxIntervalBetweenSpawns);
+	}
 
+	while (m_ElapsedTime - m_LastSpriteSpawn > spawnInterval)
+	{
 		for (auto& sprite : m_Sprites)
 		{
 			if (!sprite.IsVisible())
 			{
 				RandomizeSprite(sprite);
 				sprite.SetVisible(true);
-				return;
+				break;
 			}
 		}
+
+		m_LastSpriteSpawn += spawnInterval;
 	}
 }
 
@@ -189,9 +188,12 @@ void App::UpdateSprites()
 
 void App::UpdateFpsText()
 {
-	if (m_FpsUpdatTimer > Resources::FpsUpdateInterval)
+	m_FrameCounter++;
+	float timeSinceLastUpdate = m_ElapsedTime - m_LastFpsUpdate;
+	if (timeSinceLastUpdate > Resources::FpsUpdateInterval)
 	{
-		m_FpsText.SetText(std::format("FPS: {}", static_cast<int>(1 / m_DeltaTime)));
-		m_FpsUpdatTimer -= Resources::FpsUpdateInterval;
+		m_FpsText.SetText(std::format("FPS: {}", static_cast<int>(m_FrameCounter / timeSinceLastUpdate)));
+		m_FrameCounter = 0;
+		m_LastFpsUpdate += Resources::FpsUpdateInterval;
 	}
 }

@@ -35,7 +35,8 @@ private:
 
 	float m_ElapsedTime = 0;
 	float m_DeltaTime = 0;
-	float m_SpawnTimer = 0;
-	float m_FpsUpdatTimer = 0;
+	float m_LastSpriteSpawn = 0;
+	float m_LastFpsUpdate = 0;
+	int m_FrameCounter = 0;
 	unsigned int m_Score = 0;
 };
