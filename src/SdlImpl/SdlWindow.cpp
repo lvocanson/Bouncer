@@ -123,7 +123,7 @@ void SdlWindow::Draw(Sprite& sprite)
 	MyColor color = sprite.GetTint();
 	SDL_SetTextureColorMod(texture, color.r, color.g, color.b);
 	Rect spriteRect = sprite.GetRect();
-	SDL_FRect destRect = { spriteRect.x, spriteRect.y, spriteRect.w, spriteRect.h };
+	SDL_FRect destRect = {spriteRect.x, spriteRect.y, spriteRect.w, spriteRect.h};
 	SDL_RenderTexture(m_Renderer, texture, NULL, &destRect);
 }
 

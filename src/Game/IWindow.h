@@ -22,7 +22,7 @@ public:
 	virtual void BeginDraw() = 0;
 	virtual void EndDraw() = 0;
 	virtual void Clear(MyColor color) = 0;
-	
+
 	virtual TexturePtr* CreateTexture() = 0;
 	virtual void Draw(Sprite&) = 0;
 	virtual void Draw(Text&) = 0;

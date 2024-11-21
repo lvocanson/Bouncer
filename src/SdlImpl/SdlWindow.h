@@ -21,7 +21,7 @@ public:
 	void BeginDraw() override;
 	void EndDraw() override;
 	void Clear(MyColor color) override;
-	
+
 	TexturePtr* CreateTexture() override;
 	void Draw(Sprite&) override;
 	void Draw(Text&) override;
