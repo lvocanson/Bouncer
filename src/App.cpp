@@ -1,6 +1,7 @@
 #include "App.h"
 #include "Game/IWindow.h"
 #include "Game/IMouseInput.h"
+#include "Game/Logger.h"
 #include "Game/TexturePtr.h"
 #include "Utils/RandomHelper.h"
 #include <format>
@@ -8,24 +9,36 @@
 App::App(Lib libToUse)
 	: m_Maker(libToUse)
 {
+	auto logger = m_Maker.MakeLogger();
+	Logger::SetInstance(logger);
+	logger->Log(Logger::Info, "Logger created");
+
 	InitRand();
+	logger->Log(Logger::Info, "Random initialized");
 
 	m_Window = m_Maker.MakeWindow();
 	m_Window->Create(Resources::AppName, Resources::WindowWidth, Resources::WindowHeight);
+	logger->Log(Logger::Info, "Window created");
+
 	m_Window->SetFont(Resources::FontPath, Resources::FontSize);
+	logger->Log(Logger::Info, "Font loaded");
 
 	m_Input = m_Maker.MakeMouseInput();
+	logger->Log(Logger::Info, "Mouse input initialized");
 
 	m_FpsText.SetText("FPS: 0");
 	m_FpsText.SetPosition(Resources::FpsTextPosition);
 	m_FpsText.SetColor(Resources::OnScreenTextColor);
+	logger->Log(Logger::Info, "FPS text setup");
 
 	m_ScoreText.SetText("Score: 0");
 	m_ScoreText.SetPosition(Resources::ScoreTextPosition);
 	m_ScoreText.SetColor(Resources::OnScreenTextColor);
+	logger->Log(Logger::Info, "Score text setup");
 
 	m_Texture = m_Window->CreateTexture();
 	m_Texture->LoadFromFile(Resources::SpriteTexPath);
+	logger->Log(Logger::Info, "Sprite texture loaded");
 
 	for (size_t i = 0; i < m_Sprites.size(); i++)
 	{
@@ -34,6 +47,7 @@ App::App(Lib libToUse)
 		RandomizeSprite(sprite);
 		sprite.SetVisible(i < Resources::StartingSpriteNumber);
 	}
+	logger->Log(Logger::Info, "All sprites initialized");
 }
 
 App::~App()

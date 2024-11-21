@@ -8,7 +8,6 @@ SdlTexturePtr::SdlTexturePtr(SDL_Renderer* renderer)
 
 void SdlTexturePtr::LoadFromFile(const char* path)
 {
-
 	auto surface = IMG_Load(path);
 	if (surface == NULL)
 	{

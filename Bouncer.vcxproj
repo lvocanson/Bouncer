@@ -147,8 +147,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\RaylibImpl\RaylibLogger.cpp" />
     <ClCompile Include="src\RaylibImpl\RaylibMouseInput.cpp" />
     <ClCompile Include="src\RaylibImpl\RaylibTexturePtr.cpp" />
+    <ClCompile Include="src\SdlImpl\SdlLogger.cpp" />
     <ClCompile Include="src\SdlImpl\SdlMouseInput.cpp" />
     <ClCompile Include="src\SdlImpl\SdlTexturePtr.cpp" />
     <ClCompile Include="src\Utils\LibraryPicker.cpp" />
@@ -161,11 +163,14 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Game\GameElement.h" />
+    <ClInclude Include="src\Game\Logger.h" />
     <ClInclude Include="src\Game\IMouseInput.h" />
     <ClInclude Include="src\Game\Text.h" />
     <ClInclude Include="src\Game\TexturePtr.h" />
+    <ClInclude Include="src\RaylibImpl\RaylibLogger.h" />
     <ClInclude Include="src\RaylibImpl\RaylibMouseInput.h" />
     <ClInclude Include="src\RaylibImpl\RaylibTexturePtr.h" />
+    <ClInclude Include="src\SdlImpl\SdlLogger.h" />
     <ClInclude Include="src\SdlImpl\SdlMouseInput.h" />
     <ClInclude Include="src\SdlImpl\SdlTexturePtr.h" />
     <ClInclude Include="src\Utils\MyColor.h" />

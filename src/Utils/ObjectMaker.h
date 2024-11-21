@@ -3,6 +3,7 @@
 
 class IWindow;
 class IMouseInput;
+class Logger;
 
 // Only class that has the responsability to choose between implementations
 class ObjectMaker
@@ -13,6 +14,7 @@ public:
 
 	IWindow* MakeWindow();
 	IMouseInput* MakeMouseInput();
+	Logger* MakeLogger();
 
 private:
 
