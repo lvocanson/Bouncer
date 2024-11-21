@@ -1,5 +1,6 @@
 #include "SdlWindow.h"
 #include "SdlTexturePtr.h"
+#include "SdlFontPtr.h"
 #include "Game/Sprite.h"
 #include "Game/Text.h"
 #include <SDL3/SDL.h>
@@ -34,13 +35,16 @@ void SdlWindow::Create(const char* title, int width, int height)
 		SDL_LogError(0, "Failed to create renderer. %s", SDL_GetError());
 		return;
 	}
+
+	m_Engine = TTF_CreateRendererTextEngine(m_Renderer);
+	if (m_Engine == NULL)
+	{
+		SDL_LogError(0, "Text Engine creation failed: %s", SDL_GetError());
+	}
 }
 
 void SdlWindow::Quit()
 {
-	TTF_CloseFont(m_Font);
-	m_Font = nullptr;
-
 	TTF_DestroyRendererTextEngine(m_Engine);
 	m_Engine = nullptr;
 
@@ -78,25 +82,6 @@ float SdlWindow::Update()
 	return deltaTime;
 }
 
-
-void SdlWindow::SetFont(const char* path, float size)
-{
-	TTF_CloseFont(m_Font);
-	TTF_DestroyRendererTextEngine(m_Engine);
-
-	m_Engine = TTF_CreateRendererTextEngine(m_Renderer);
-	if (m_Engine == NULL)
-	{
-		SDL_LogError(0, "Text Engine creation failed: %s", SDL_GetError());
-	}
-
-	m_Font = TTF_OpenFont(path, size);
-	if (m_Font == NULL)
-	{
-		SDL_LogError(0, "Open Font failed: %s", SDL_GetError());
-	}
-}
-
 void SdlWindow::BeginDraw()
 {
 }
@@ -127,9 +112,9 @@ void SdlWindow::Draw(Sprite& sprite)
 	SDL_RenderTexture(m_Renderer, texture, NULL, &destRect);
 }
 
-void SdlWindow::Draw(Text& text)
+void SdlWindow::Draw(Text& text, FontPtr& fontPtr)
 {
-	auto ttfText = TTF_CreateText(m_Engine, m_Font, text.GetText().c_str(), 0);
+	auto ttfText = TTF_CreateText(m_Engine, fontPtr.As<TTF_Font>(), text.GetText().c_str(), 0);
 	if (ttfText == NULL)
 	{
 		SDL_LogError(0, "Create Text failed: %s", SDL_GetError());

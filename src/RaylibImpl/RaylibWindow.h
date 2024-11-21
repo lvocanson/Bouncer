@@ -12,22 +12,15 @@ public:
 
 	float Update() override;
 
-	void SetFont(const char* path, float size) override;
-
 	void BeginDraw() override;
 	void EndDraw() override;
 	void Clear(MyColor color) override;
 
 	TexturePtr* CreateTexture() override;
+
 	void Draw(Sprite&) override;
-	void Draw(Text&) override;
+	void Draw(Text&, FontPtr& fontPtr) override;
 
 	int GetWidth() override;
 	int GetHeight() override;
-
-private:
-
-	Font m_Font;
-	float m_FontSize;
-	int m_score = 0;
 };

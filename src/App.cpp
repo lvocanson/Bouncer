@@ -1,6 +1,7 @@
 #include "App.h"
 #include "Game/IWindow.h"
 #include "Game/IMouseInput.h"
+#include "Game/FontPtr.h"
 #include "Game/Logger.h"
 #include "Game/TexturePtr.h"
 #include "Utils/RandomHelper.h"
@@ -20,11 +21,13 @@ App::App(Lib libToUse)
 	m_Window->Create(Resources::AppName, Resources::WindowWidth, Resources::WindowHeight);
 	logger->Log(Logger::Info, "Window created");
 
-	m_Window->SetFont(Resources::FontPath, Resources::FontSize);
-	logger->Log(Logger::Info, "Font loaded");
-
 	m_Input = m_Maker.MakeMouseInput();
 	logger->Log(Logger::Info, "Mouse input initialized");
+
+	m_Font = m_Maker.MakeFontPtr();
+	m_Font->SetSize(Resources::FontSize);
+	m_Font->LoadFromFile(Resources::FontPath);
+	logger->Log(Logger::Info, "Font loaded");
 
 	m_FpsText.SetText("FPS: 0");
 	m_FpsText.SetPosition(Resources::FpsTextPosition);
@@ -53,6 +56,12 @@ App::App(Lib libToUse)
 App::~App()
 {
 	m_Texture->Unload();
+	delete m_Texture;
+	m_Texture = nullptr;
+
+	m_Font->Unload();
+	delete m_Font;
+	m_Font = nullptr;
 
 	delete m_Window;
 	m_Window = nullptr;
@@ -75,8 +84,8 @@ int App::Run()
 		{
 			if (sprite.IsVisible()) m_Window->Draw(sprite);
 		}
-		m_Window->Draw(m_FpsText);
-		m_Window->Draw(m_ScoreText);
+		m_Window->Draw(m_FpsText, *m_Font);
+		m_Window->Draw(m_ScoreText, *m_Font);
 		m_Window->EndDraw();
 
 		m_DeltaTime = m_Window->Update();
@@ -154,7 +163,6 @@ void App::UpdateSprites()
 			}
 		}
 		{
-
 			float maxX = m_Window->GetWidth() - spriteRect.w;
 			float maxY = m_Window->GetHeight() - spriteRect.h;
 

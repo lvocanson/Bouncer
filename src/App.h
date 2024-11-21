@@ -8,6 +8,7 @@
 class IWindow;
 class IMouseInput;
 class TexturePtr;
+class FontPtr;
 
 class App
 {
@@ -28,8 +29,11 @@ private:
 	ObjectMaker m_Maker;
 	IWindow* m_Window;
 	IMouseInput* m_Input;
+	
+	FontPtr* m_Font;
 	Text m_FpsText;
 	Text m_ScoreText;
+
 	TexturePtr* m_Texture;
 	std::array<Sprite, Resources::MaxSpriteNumber> m_Sprites;
 
@@ -37,6 +41,6 @@ private:
 	float m_DeltaTime = 0;
 	float m_LastSpriteSpawn = 0;
 	float m_LastFpsUpdate = 0;
-	int m_FrameCounter = 0;
+	unsigned int m_FrameCounter = 0;
 	unsigned int m_Score = 0;
 };

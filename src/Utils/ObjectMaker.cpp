@@ -2,47 +2,45 @@
 #include "SdlImpl/SdlWindow.h"
 #include "SdlImpl/SdlMouseInput.h"
 #include "SdlImpl/SdlLogger.h"
+#include "SdlImpl/SdlFontPtr.h"
 #include "RaylibImpl/RaylibWindow.h"
 #include "RaylibImpl/RaylibMouseInput.h"
 #include "RaylibImpl/RaylibLogger.h"
+#include "RaylibImpl/RaylibFontPtr.h"
 
 ObjectMaker::ObjectMaker(Lib library)
 	: m_Library(library)
 {
 }
 
+#define SWITCH_ON(object) \
+switch (m_Library) \
+{ \
+case SDL: \
+	return new Sdl##object(); \
+case raylib: \
+	return new Raylib##object(); \
+default: \
+	return nullptr; \
+} 
+
+
 IWindow* ObjectMaker::MakeWindow()
 {
-	switch (m_Library)
-	{
-	case SDL:
-		return new SdlWindow();
-	case raylib:
-		return new RaylibWindow();
-	}
-	return nullptr;
+	SWITCH_ON(Window);
 }
 
 IMouseInput* ObjectMaker::MakeMouseInput()
 {
-	switch (m_Library)
-	{
-	case SDL:
-		return new SdlMouseInput();
-	case raylib:
-		return new RaylibMouseInput();
-	}
-	return nullptr;
+	SWITCH_ON(MouseInput);
 }
 
 Logger* ObjectMaker::MakeLogger()
 {
-	switch (m_Library)
-	{
-	case SDL:
-		return new SdlLogger();
-	case raylib:
-		return new RaylibLogger();
-	}
-	return nullptr;
+	SWITCH_ON(Logger);
+}
+
+FontPtr* ObjectMaker::MakeFontPtr()
+{
+	SWITCH_ON(FontPtr);
 }
